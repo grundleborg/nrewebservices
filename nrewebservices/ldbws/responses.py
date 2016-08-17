@@ -1,5 +1,5 @@
 from nrewebservices.common import SoapResponseObject
-from nrewebservices.common import make_simple_mapper
+from nrewebservices.common import make_boolean_mapper, make_simple_mapper
 
 def make_nrcc_mapper(field_name):
     def mapper(soap_response):
@@ -85,8 +85,8 @@ class BoardBase(SoapResponseObject):
             ('filter_location_name', make_simple_mapper('filterLocationName')),
             ('filter_crs', make_simple_mapper('filterCrs')),
             ('filter_type', make_simple_mapper('filterType')),
-            ('platform_available', make_simple_mapper('platformAvailable')),
-            ('services_available', make_simple_mapper('areServicesAvailable')),
+            ('platform_available', make_boolean_mapper('platformAvailable')),
+            ('services_available', make_boolean_mapper('areServicesAvailable', True)),
             ('nrcc_messages', make_nrcc_mapper('nrccMessages')),
     ]
 
@@ -154,13 +154,13 @@ class ServiceItemBase(SoapResponseObject):
             ('platform', make_simple_mapper('platform')),
             ('operator', make_simple_mapper('operator')),
             ('operator_code', make_simple_mapper('operatorCode')),
-            ('circular_route', make_simple_mapper('isCircularRoute')),
-            ('cancelled', make_simple_mapper('isCancelled')),
-            ('filter_location_cancelled', make_simple_mapper('filterLocationCancelled')),
-            ('service_type', make_simple_mapper('service_type')),
+            ('circular_route', make_boolean_mapper('isCircularRoute')),
+            ('cancelled', make_boolean_mapper('isCancelled')),
+            ('filter_location_cancelled', make_boolean_mapper('filterLocationCancelled')),
+            ('service_type', make_simple_mapper('serviceType')),
             ('length', make_simple_mapper('length')),
-            ('detach_front', make_simple_mapper('detachFront')),
-            ('reverse_formation', make_simple_mapper('reverse_formation')),
+            ('detach_front', make_boolean_mapper('detachFront')),
+            ('reverse_formation', make_boolean_mapper('isReverseFormation')),
             ('cancel_reason', make_simple_mapper('cancelReason')),
             ('delay_reason', make_simple_mapper('delayReason')),
             ('service_id', make_simple_mapper('serviceID')),

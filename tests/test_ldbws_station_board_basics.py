@@ -37,9 +37,7 @@ class TestStationBoardDepartures(object):
         assert board.filter_crs is None
         assert board.filter_type is None
         assert board.platform_available is True
-
-        # This one does not appear to be reported as per the online documentation.
-        assert board.services_available is None
+        assert board.services_available is True
         
         # NRCC messages list.
         assert board.nrcc_messages == ['<P>Amended weekday Southern and Gatwick Express services. More information in <A href="http://nationalrail.co.uk/service_disruptions/143147.aspx">Latest Travel News</A>.</P>']
@@ -56,8 +54,25 @@ class TestStationBoardDepartures(object):
         assert len(service.destinations) == 1
         assert len(service.current_origins) == 0
         assert len(service.current_destinations) == 0
-        #assert service.sta == datetime.time(0, 1, 2)
-        # TODO: All the rest...
+        assert service.sta is None
+        assert service.eta is None
+        assert service.std == "22:03"
+        assert service.etd == "22:14"
+        assert service.platform == "1"
+        assert service.operator == "Southern"
+        assert service.operator_code == "SN"
+        assert service.circular_route is False
+        assert service.cancelled is False
+        assert service.filter_location_cancelled is False
+        assert service.service_type == "train"
+        assert service.length is None
+        assert service.detach_front is False
+        assert service.reverse_formation is False
+        assert service.cancel_reason is None
+        assert service.delay_reason is None
+        assert service.service_id == "l4/FfBv9+LeshRsit6lwzw=="
+        assert service.adhoc_alerts == None
+        assert service.rsid == "SN083300"
 
     def test_station_board_train_service_origin_basics(self, board):
         # Basic service location properties.

@@ -16,5 +16,14 @@ def make_simple_mapper(field_name):
         return value
     return mapper
 
+def make_boolean_mapper(field_name, default=False):
+    def mapper(soap_response):
+        try:
+            value = getattr(soap_response, field_name)
+        except AttributeError:
+            value = default
+
+        return value
+    return mapper
 
 
