@@ -37,7 +37,7 @@ class Session(object):
         self._soap_client.set_options(soapheaders=(access_token))
 
     def get_station_board(self, crs, rows=10, include_departures=True, include_arrivals=False,
-            from_filter_crs=None, to_filter_crs=None):
+            from_filter_crs=None, to_filter_crs=None, time_offset=None, time_window=None):
 
         # Get the appropriate SOAP query method.
         if include_departures and include_arrivals:
@@ -61,6 +61,10 @@ class Session(object):
         elif from_filter_crs:
             params['filterCrs'] = from_filter_crs
             params['filterType'] = 'from'
+        if time_offset is not None:
+            params['timeOffset'] = time_offset
+        if time_window is not None:
+            params['timeWindow'] = time_window
 
         # Do the SOAP query.
         # TODO: Some form of error handling.
