@@ -1,14 +1,10 @@
 Historical Service Performance
 ==============================
 
-Overview
---------
+.. warning::
 
-TODO
+   The Historical Service Performance API is not supported in this version of NREWebServices.
+   Support for it will be added in a future version.
 
-Status
-------
 
-This Historical Service Performance API has not yet been added to this library. It will be added in
-a future release.
 

@@ -1,39 +1,45 @@
-LDB Staff Version
-=================
+LDBWS Staff Version
+===================
 
-Overview
---------
+.. warning::
 
-TODO
+   The LDBWS Staff Version API is not supported in this version of NREWebServices.
+   Support for it will be added in a future version.
 
-Official Documentation
-----------------------
+..
+    Overview
+    --------
 
-TODO
+    TODO
 
-Getting an Access Token
------------------------
+    Official Documentation
+    ----------------------
 
-TODO
+    TODO
 
-Web Service Sessions
---------------------
+    Getting an Access Token
+    -----------------------
 
-TODO
+    TODO
 
-Reference Data Caching
-----------------------
+    Web Service Sessions
+    --------------------
 
-TODO
+    TODO
 
-Usage Example
--------------
+    Reference Data Caching
+    ----------------------
 
-TODO
+    TODO
 
-API Reference
--------------
+    Usage Example
+    -------------
 
-TODO
+    TODO
+
+    API Reference
+    -------------
+
+    TODO
 
 
