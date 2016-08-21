@@ -14,7 +14,7 @@ Contents:
     introduction
     ldbws
     staff
-    historical
+    hsp
     api
 
 
