@@ -47,4 +47,11 @@ NextDeparturesBoardWithDetails
    :show-inheritance:
    :inherited-members:
 
+ServiceItemBase
+---------------
+.. autoclass:: ServiceItemBase
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 

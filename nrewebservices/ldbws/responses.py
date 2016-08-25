@@ -236,6 +236,94 @@ class NextDeparturesBoardWithDetails(BoardBase):
 
 
 class ServiceItemBase(SoapResponseObject):
+    """
+    This class acts as the base class containing the common attributes for the various classes that
+    encapsulate individual services as shown on the various boards. You do not normally need to
+    instantiate this class directly.
+
+    Attributes:
+        origins (list[ServiceLocation]): a list of the origins of this service. Services may have
+            multiple origins when they are formed of two separate trains that have been joined
+            en-route. This attribute is only populated for boards where arrivals are included.
+
+        destinations (list[ServiceLocation]): a list of the destinations of this service. Services
+            may have multiple destinations when they split at a subsequent station into two trains
+            to different destinations. This attribute is only populated for boards where departures
+            are included.
+
+        current_origins (list[ServiceLocation]): a list of the currently valid origins of the
+            service. This attribute is only populated when the scheduled origin(s) have been
+            cancelled and the board requsted includes arrivals.
+
+        current_destinations (list[ServiceLocation]): a list of the currently valid destinations of
+            the service. This attribute is only populated when the scheduled destination(s) have
+            been cancelled and the board requested includes departures.
+
+        sta (str): the scheduled arrival time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes arrivals and there is an arrival event
+            scheduled at this location.
+
+        eta (str): the estimated arrival time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes arrivals and there is an arrival event
+            scheduled at this location.
+
+        std (str): the scheduled departure time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes departures and there is a departure event
+            scheduled at this location.
+
+        etd (str): the estimated departure time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes departures and there is a departure event
+            scheduled at this location.
+
+        platform (str): the platform that this service will use at this location. This will only be
+            present where it is available from station CIS systems and where `platforms_available`
+            is set to True on the parent board.
+
+        operator (str): the name of the Train Operating Company that operates this service.
+
+        operator_code (str): the two-letter code identifying the Train Operating Company that
+            operates this service. Please see the Open Rail Data Wiki `Toc Codes Page 
+            <http://nrodwiki.rockshore.net/index.php/TOC_Codes>`_ for the full list.
+
+        circular_route (boolean): when True, this service is operating on a circular route and will
+            call at this station again later on its journey. This should be clearly communicated in
+            user interfaces to ensure users can effectively identify the right train to take from
+            the different options that exist in this case.
+
+        cancelled (boolean): when True, indicates that this service has been cancelled at this
+            location.
+
+        filter_location_cancelled (boolean): when True, indicates that the service has had its
+            stop at the requested filter location cancelled and now will not stop there.
+
+        service_type (str): the type of transport this service consists of. Can be *train*, *bus* or
+            *ferry*.
+        
+        length (int): the train length (in number of units). If this is set to 0 then the length
+            of the train is unknown.
+
+        detach_front (boolean): if True then the service detaches units from the front at this
+            location.
+
+        reverse_formation (boolean): if True then the service is operating in reverse formation
+            (i.e. the order of the train carriages is the reverse of what it normally is).
+
+        cancel_reason (str): if this service is canelled, the reason for this cancellation.
+
+        delay_reason (str): if this service is delayed, the reason for this delay.
+
+        service_id (str): the unique identifier of this service relative to the station of the board
+            at which this service exists. This ID can be used to lookup the service details with
+            `get_service_details`. However, this ID is not useful for using with any other API,
+            and will expire and stop working within a few hours of the service being deactivated.
+
+        adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
+    """
+
     field_map = [
             ('origins', make_service_locations_mapper('origin')),
             ('destinations', make_service_locations_mapper('destination')),
@@ -260,8 +348,6 @@ class ServiceItemBase(SoapResponseObject):
             ('service_id', make_simple_mapper('serviceID')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
     ]
-
-    # TODO: Document the properties.
 
 
 class ServiceItem(ServiceItemBase):

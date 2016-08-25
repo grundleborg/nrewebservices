@@ -49,6 +49,22 @@ object ensuring subsequent API requests can take place immediately.
 Once the :py:obj:`Session <nrewebservices.ldbws.Session>` object has been instantiated, API requests
 are made by means of calling the available methods on this object.
 
+
+.. _ldbws-times:
+
+Times
+-----
+
+Many of the objects returned by the LDBWS API contain attributes which represent times. However, in
+the raw API these are treated as strings, because there are some values they can contain which are
+not valid times. In general, times are provided in the format hh:mm. However, sometimes they may
+be followed by an asterisk indicating that the Darwin system is unsure as to their reliability.
+They may also be replaced in some cases by strings which can include the following "Delayed", 
+"On Time", "Cancelled" and "No report". The values of these fields are sutiable to be displayed
+directly as provided on departure boards (in fact, that is what the on-platform ones at stations
+do). However, if you are planning to parse them as times, you should take these alternative values
+into consideration.
+
 Usage Example
 -------------
 
