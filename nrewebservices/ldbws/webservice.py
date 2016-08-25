@@ -9,7 +9,38 @@ log = logging.getLogger(__name__)
 LDBWS_NAMESPACE = ('com','http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes')
 
 class Session(object):
+    """
+    This class provides the interface to the LDBWS web service session.
+
+    Note:
+        There are some (unknown) internal rules on the LDBWS server which limit the number of
+        services returned in a response, sometimes to less than the number requested by the
+        `time_window` and/or `rows` parameters to a request. Unfortunately there is nothing that can
+        be done about this, so you just have to work with it.
+    """
     def __init__(self, wsdl=None, api_key=None, timeout=5):
+        """
+        You should normally instantiate this class only once per application, as it fetches and
+        parses the WSDL from the server on instantiation, normally taking a few seconds to complete.
+
+        Args:
+            wsdl (str): the URL of the web service WSDL. Be sure to pass the ?ver=2016-02-16 on the
+                end of the URL to get the version this library currently supports. If this parameter
+                is not provided, the code expects to find an environment variable called
+                **NRE_LDBWS_WSDL** containing it instead.
+
+            api_key (str): your LDBWS API key. If this is not provided, the code expects to find an
+                environment variable called **NRE_LDBWS_API_KEY** containing it instead.
+
+            timeout (int): the number of seconds the after which the underlying SOAP client should
+                timeout unfinished requests.
+
+        Raises:
+            ValueError: if neither of the `wsdl` parameter or the **NRE_LDBWS_WSDL** environment
+                variable are provided.
+            ValueError: if neither of the `api_key` parameter or the **NRE_LDBWS_API_KEY**
+                environment variable are provided.
+        """
 
         # Try getting the WSDL and API KEY from the environment if they aren't explicitly passed.
         if not wsdl:
@@ -38,6 +69,47 @@ class Session(object):
 
     def get_station_board(self, crs, rows=10, include_departures=True, include_arrivals=False,
             from_filter_crs=None, to_filter_crs=None, time_offset=None, time_window=None):
+        """
+        Get a list of public services at a station as would populate a departure/arrival board.
+
+        Args:
+            crs (str): the CRS code of the station for which this board is being fetched.
+
+            rows (int, from 1 to 150): the maximum number of services to include in the returned
+                board.
+
+            include_departures (boolean): whether the returned services should include departures
+                from this station. At least one of `include_departures` or `include_arrivals` must
+                be set to true.
+
+            include_arrivals (boolean): whether the returned services should include arrivals at
+                this station. At least one of `include_departures` or `include_arrivals` must be set
+                to true.
+
+            from_filter_crs (str): the CRS code of a station at which all services returned must
+                have called previously. Only one of `from_filter_crs` and `to_filter_crs` can be set
+                for a given request.
+
+            to_filter_crs (str): the CRS code of a station at which all services returned must
+                subsequently call. Only one of `from_filter_crs` and `to_filter_crs` can be set for
+                a given request.
+
+            time_offset (int, from -120 to 120): An offset in minutes against the current time which
+                determines the starting point of the time window for which services are returned. If
+                set to `None`, the value of 0 will be used.
+
+            time_window (int, from -120 to 120): How far into the future from the value passed as
+                `time_offset` should services be fetched. If the value passed is negative, the time
+                window starts before the value of `time_offset` and ends at `time_offset`. If `None`
+                is passed, the default value is 120.
+
+        Returns:
+            StationBoard: a `StationBoard` object containing the station details and the requested
+            services.
+
+        Note:
+            Each time this his method is called, it makes **1** request to the LDBWS server.
+        """
 
         # Get the appropriate SOAP query method.
         if include_departures and include_arrivals:

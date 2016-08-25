@@ -8,6 +8,8 @@ Session
 .. autoclass:: Session
    :members:
 
+   .. automethod:: __init__
+
 BoardBase
 ---------
 
