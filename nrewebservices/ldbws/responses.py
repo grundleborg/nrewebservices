@@ -199,6 +199,14 @@ class StationBoardWithDetails(BoardBase):
 
 
 class NextDeparturesBoard(BoardBase):
+    """
+    This class represents the board containing the next departures to the requested destinations.
+    You do not normally need to instantiate this class directly.
+
+    Attributes:
+        next_departures (list[NextDeparturesItem]): a list of objects containing one of the
+            requested locations and the next services that depart to that location.
+    """
     field_map = BoardBase.field_map + [
         ('next_departures', make_next_departures_mapper('departures')),
     ]
@@ -206,18 +214,25 @@ class NextDeparturesBoard(BoardBase):
     def __init__(self, soap_response, *args, **kwargs):
         super(NextDeparturesBoard, self).__init__(soap_response, *args, **kwargs)
 
-    # TODO: Document the properties.
-
 
 class NextDeparturesBoardWithDetails(BoardBase):
+    """
+    This class represents the board containing the next departures to the requested destinations.
+    The difference from `NextDeparturesBoard` is that the services returned within the
+    `NextDepartureItem`s of this board are of type `NexteDepartureItemWithCallingPoints`, which
+    includes the service calling points, which otherwise would have to be requested with individual
+    calls to `get_service_details`. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        next_departures (list[NextDeparturesItemWithCallingPoints]): a list of objects containing
+            one of the requested locations and the next services that depart to that location.
+    """
     field_map = BoardBase.field_map + [
         ('next_departures', make_next_departures_with_details_mapper('departures')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):
         super(NextDeparturesBoardWithDetails, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 
 class ServiceItemBase(SoapResponseObject):

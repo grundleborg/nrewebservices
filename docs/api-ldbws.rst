@@ -33,4 +33,18 @@ StationBoardWithDetails
    :show-inheritance:
    :inherited-members:
 
+NextDeparturesBoard
+-------------------
+.. autoclass:: NextDeparturesBoard
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+NextDeparturesBoardWithDetails
+------------------------------
+.. autoclass:: NextDeparturesBoardWithDetails
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 
