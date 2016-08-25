@@ -1,5 +1,6 @@
 # Module init file.
 
+from .responses import BoardBase
 from .responses import NextDeparturesBoard
 from .responses import NextDeparturesBoardWithDetails
 from .responses import ServiceDetails

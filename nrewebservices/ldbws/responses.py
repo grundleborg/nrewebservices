@@ -78,6 +78,47 @@ def make_calling_points_mapper(field_name):
     return mapper
 
 class BoardBase(SoapResponseObject):
+    """
+    This class acts as the base class containing the common attributes for the various classes that
+    encapsulate API responses in the form of a list of services at a station. You do not normally
+    need to instantiate this class directly.
+
+    Attributes:
+        generated_at (datetime): the time at which the board was generated on the LDBWS server.
+
+        location_name (str): the name of the location the board is for.
+
+        crs (str): the CRS code of the location the board is for.
+
+        filter_location_name (str): if a filter was provided in the request, the name of the
+            location at which the board services were filtered.
+
+        filter_crs (str): if a filter was provided in the request, the CRS code of the location at
+            which the board services were filtered.
+
+        filter_type (str): if a filter was provided in the request, this can contain either "from",
+            indicating that the filtered services must have previously called at the filter location
+            or "to", indicating that the filtered services must subsequently call at the filter
+            location.
+
+        platforms_available (boolean): if true, this indicates that platform information is available
+            at this station and can be provided in the user interface. If false, this means that
+            platform information is not currently available at this station and should be suppressed
+            in the user interface.
+
+        services_available (boolean): if true, this indicates that services are currently available
+            in the returned board. If false, this means that services will not be returned in the
+            provided board. An example of when this might be set false is when a station has been
+            closed due to an incident, but trains are still passing through non-stopping. Normally
+            the `nrcc_messages` will contain a message explaining the reason for this when it
+            occurs.
+
+        nrcc_messages (list[str]): a list of textual messages that should be displayed with the
+            services on the board. These typically contain service information at times when there
+            are problems or disruption. They may sometimes contain HTML style <A> an <P> tags.
+    """
+
+
     field_map = [
             ('generated_at', make_simple_mapper('generatedAt')),
             ('location_name', make_simple_mapper('locationName')),
@@ -85,7 +126,7 @@ class BoardBase(SoapResponseObject):
             ('filter_location_name', make_simple_mapper('filterLocationName')),
             ('filter_crs', make_simple_mapper('filterCrs')),
             ('filter_type', make_simple_mapper('filterType')),
-            ('platform_available', make_boolean_mapper('platformAvailable')),
+            ('platforms_available', make_boolean_mapper('platformAvailable')),
             ('services_available', make_boolean_mapper('areServicesAvailable', True)),
             ('nrcc_messages', make_nrcc_mapper('nrccMessages')),
     ]
