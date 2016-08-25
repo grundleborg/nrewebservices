@@ -107,6 +107,9 @@ class Session(object):
             StationBoard: a `StationBoard` object containing the station details and the requested
             services.
 
+        Raises:
+            ValueError: if neither include_departures or include_arrivals are set to True.
+
         Note:
             Each time this his method is called, it makes **1** request to the LDBWS server.
         """
