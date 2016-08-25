@@ -132,6 +132,26 @@ class BoardBase(SoapResponseObject):
 
 
 class StationBoard(BoardBase):
+    """
+    This class represents the arrivals/departures board of a station, provided in response to a
+    `get_station_board` request. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        train_services (list[ServiceItem]): the list of train services that appear on the requested
+            board. This list is provided in the order in which it should be displayed.
+
+        bus_services (list[ServiceItem]): the list of bus services that appear on the requested board.
+            This list is provided in the order in which it should be displayed.
+
+        ferry_services (list[ServiceItem]): the list of ferry services that appear on the requested
+            board. This list is provided in the order in which it should be displayed.
+
+    Note:
+        If you are showing a single combined list of train, bus and ferry services, the sort order
+        that is typically used is to sort the services based on scheduled time (arrival/departure as
+        appropriate) with the lowest first. Be careful when showing services across midnight.
+    """
+
     field_map = BoardBase.field_map + [
             ('train_services', make_services_mapper('trainServices')),
             ('bus_services', make_services_mapper('busServices')),
@@ -140,8 +160,6 @@ class StationBoard(BoardBase):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(StationBoard, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 
 class StationBoardWithDetails(BoardBase):
