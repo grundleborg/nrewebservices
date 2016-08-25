@@ -19,10 +19,16 @@ BoardBase
    :show-inheritance:
    :inherited-members:
 
-
 StationBoard
 ------------
-.. autoclass:: StationBoard 
+.. autoclass:: StationBoard
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+StationBoardWithDetails
+-----------------------
+.. autoclass:: StationBoardWithDetails
    :members:
    :show-inheritance:
    :inherited-members:
