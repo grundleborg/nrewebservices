@@ -118,7 +118,6 @@ class BoardBase(SoapResponseObject):
             are problems or disruption. They may sometimes contain HTML style <A> an <P> tags.
     """
 
-
     field_map = [
             ('generated_at', make_simple_mapper('generatedAt')),
             ('location_name', make_simple_mapper('locationName')),
@@ -130,8 +129,6 @@ class BoardBase(SoapResponseObject):
             ('services_available', make_boolean_mapper('areServicesAvailable', True)),
             ('nrcc_messages', make_nrcc_mapper('nrccMessages')),
     ]
-
-    # TODO: Document the properties.
 
 
 class StationBoard(BoardBase):
