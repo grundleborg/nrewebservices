@@ -351,6 +351,14 @@ class ServiceItemBase(SoapResponseObject):
 
 
 class ServiceItem(ServiceItemBase):
+    """
+    This class represents a single service that appears on an arrival/departure board. You do not
+    normally need to instantiate this class directly.
+
+    Attributes:
+        rsid (str): the Retail Service ID of the service, if known by the Darwin system.
+    """
+
     field_map = ServiceItemBase.field_map + [
             ('rsid', make_simple_mapper('rsid')),
     ]
@@ -358,10 +366,22 @@ class ServiceItem(ServiceItemBase):
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceItem, self).__init__(soap_response, *args, **kwargs)
 
-    # TODO: Document the properties.
-
 
 class ServiceItemWithCallingPoints(ServiceItemBase):
+    """
+    This class represents a single service that appears on an arrival/departure board where details
+    were requested. The main difference from a regular `ServiceItem` is that it is prepopulated with
+    the previous and subsequent calling points of the service without requiring an additional
+    request to `get_service_details` to retrieve these. You do not normally need to instantiate this
+    class directly.
+
+    Attributes:
+        previous_calling_points ([CallingPoint]): a list of all calling points on this service
+            before the location at which the board was requested.
+
+        subsequent_calling_points ([CallingPoint]): a list of all calling points on this service
+            after the location at which the board was requested.
+    """
     field_map = ServiceItemBase.field_map + [
             ('previous_calling_points', make_calling_points_mapper('previousCallingPoints')),
             ('subsequent_calling_points', make_calling_points_mapper('subsequentCallingPoints')),
@@ -369,8 +389,6 @@ class ServiceItemWithCallingPoints(ServiceItemBase):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceItemWithCallingPoints, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 
 class ServiceLocation(SoapResponseObject):

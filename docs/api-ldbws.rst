@@ -54,4 +54,18 @@ ServiceItemBase
    :show-inheritance:
    :inherited-members:
 
+ServiceItem
+-----------
+.. autoclass:: ServiceItem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+ServiceItemWithCallingPoints
+----------------------------
+.. autoclass:: ServiceItemWithCallingPoints
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 
