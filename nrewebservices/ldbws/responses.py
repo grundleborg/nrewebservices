@@ -392,6 +392,27 @@ class ServiceItemWithCallingPoints(ServiceItemBase):
 
 
 class ServiceLocation(SoapResponseObject):
+    """
+    This class represents a single location (station) at which a service either begins or ends. You
+    do not normally need to instantiate this class directly.
+
+    Attributes:
+        location_name (str): the name of the location.
+
+        crs (str): the CRS code of the location. A CRS code of ??? indicates that the location has
+            no CRS code that is known to the Darwin system.
+
+        via (str): when the service is taking an ambiguous route, a string of text describing the
+            station or stations it travels via in order to disambiguate. This is typically displayed
+            after the destination on departure boards. It is only present for destinations.
+
+        future_change_to (str): if the service is to change to a different mode in future, that mode
+            is indicated here (either bus/train/ferry).
+
+        association_is_cancelled (boolean): True if the associated service has been cancelled that
+            took this service to this origin or destination, meaning this location will no longer
+            be reached by the running service.
+    """
     field_map = [
             ('location_name', make_simple_mapper('locationName')),
             ('crs', make_simple_mapper('crs')),
@@ -402,8 +423,6 @@ class ServiceLocation(SoapResponseObject):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceLocation, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 
 class CallingPoint(SoapResponseObject):

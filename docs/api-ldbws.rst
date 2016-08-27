@@ -68,4 +68,11 @@ ServiceItemWithCallingPoints
    :show-inheritance:
    :inherited-members:
 
+ServiceLocation
+---------------
+.. autoclass:: ServiceLocation
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 
