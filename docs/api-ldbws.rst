@@ -76,8 +76,22 @@ ServiceLocation
    :inherited-members:
 
 CallingPoint
----------------
+------------
 .. autoclass:: CallingPoint
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+NextDeparturesItem
+------------------
+.. autoclass:: NextDeparturesItem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+NextDeparturesItemWithCallingPoints
+-----------------------------------
+.. autoclass:: NextDeparturesItemWithCallingPoints
    :members:
    :show-inheritance:
    :inherited-members:

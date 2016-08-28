@@ -480,12 +480,27 @@ class CallingPoint(SoapResponseObject):
 
 
 class NextDeparturesItemBase(SoapResponseObject):
+    """
+    This class acts as the base clas for entries on the next departures boards, containing the
+    common attributes therof. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        crs (str): the CRS code of the location that this departure item contains the next
+            departures to.
+    """
     field_map = [
             ('crs', make_simple_mapper('crs')),
     ]
 
 
 class NextDeparturesItem(NextDeparturesItemBase):
+    """
+    This class represents an entry on a NextDeparturesBoard, containing the next departures to a
+    single location. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        services ([ServiceItem]): a list of the next services to depart to the requested location.
+    """
     field_map = NextDeparturesItemBase.field_map + [
             ('services', make_services_mapper('service')),
     ]
@@ -493,10 +508,19 @@ class NextDeparturesItem(NextDeparturesItemBase):
     def __init__(self, soap_response, *args, **kwargs):
         super(NextDeparturesItem, self).__init__(soap_response, *args, **kwargs)
 
-    # TODO: Document the properties.
-
 
 class NextDeparturesItemWithCallingPoints(NextDeparturesItemBase):
+    """
+    This class represents an entry on a NextDeparturesBoardWithDetails, containing the next
+    departures to a single location. The difference between this and `NextDeparturesItem` is that
+    the services are of type `ServiceItemWithCallingPoints`, which includes the service calling
+    points which otherwise would have to be requested with individual calls to
+    `get_service_details`. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        services ([ServiceItemWithCallingPoints]): a list of the next services to depart to the
+            requested location.
+    """
     field_map = NextDeparturesItemBase.field_map + [
             ('services', make_services_with_details_mapper('service')),
     ]
