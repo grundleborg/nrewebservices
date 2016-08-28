@@ -75,4 +75,11 @@ ServiceLocation
    :show-inheritance:
    :inherited-members:
 
+CallingPoint
+---------------
+.. autoclass:: CallingPoint
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 

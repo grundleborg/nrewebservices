@@ -426,6 +426,43 @@ class ServiceLocation(SoapResponseObject):
 
 
 class CallingPoint(SoapResponseObject):
+    """
+    This class represents a single calling point along a service (i.e. a the details of a stop made
+    at a station by the service). You do not normally need to instantiate this class directly.
+
+    Attributes:
+        location_name (str): the name of the station where the stop occurs.
+
+        crs (str): the CRS code of the station at which the stop occurs. A CRS code of ??? indicates
+            that the location has no CRS code that is known to the Darwin system.
+
+        st (str): the scheduled time at which the stop occurs. If this is a previous calling point,
+            the value will be the departure time. If it is a subsequent calling point, then the
+            value will be an arrival time. The value of this field is as outlined in the section on
+            :ref:`LDBWS times<ldbws-times>`.
+
+        et (str): the estimated time at which the service will make this stop. If this is a previous
+            calling point, the value will be the departure time. If it is a subsequent calling point
+            then the value will be the arrival time. Only one of `et` and `at` is ever populated at
+            a time for a given calling point. The value of this field is as outlined in the section
+            on :ref:`LDBWS times<ldbws-times>`.
+
+        at (str): the actual time at which the service made this stop. If this is a previous calling
+            point, the value will be the departure time. If it is a subsequent calling point then
+            the value will be the arrival time. Only one of `et` and `at` is ever populated at a
+            time for a given calling point. The value of this field is as outlined in the section on
+            :ref:`LDBWS times<ldbws-times>`.
+
+        cancelled (boolean): when True, indicates that this service is cancelled at this location.
+
+        length (int): the train length (in number of units). If this is set to 0 then the length of
+            the train is unknown.
+
+        detach_front (boolean): if True then the service detaches units from the front at this
+            location.
+
+        adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
+    """
     field_map = [
             ('location_name', make_simple_mapper('locationName')),
             ('crs', make_simple_mapper('crs')),
@@ -440,8 +477,6 @@ class CallingPoint(SoapResponseObject):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(CallingPoint, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 
 class NextDeparturesItemBase(SoapResponseObject):
