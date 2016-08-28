@@ -528,10 +528,104 @@ class NextDeparturesItemWithCallingPoints(NextDeparturesItemBase):
     def __init__(self, soap_response, *args, **kwargs):
         super(NextDeparturesItemWithCallingPoints, self).__init__(soap_response, *args, **kwargs)
 
-    # TODO: Document the properties.
-
 
 class ServiceDetails(SoapResponseObject):
+    """
+    This class represents the details of a service from the point of view of the station at which
+    that service was requested. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        generated_at (datetime): the time at which the service details were generated on the LDBWS
+            server.
+        
+        rsid (str): the Retail Service ID of the service, if known by the Darwin system.
+
+        service_type (str): The type of service ("bus/ferry/train"). Note that real-time information
+            such as estimated and actual times and cancellations is only available for train
+            services.
+
+        location_name (str): the name of the location at which this service was requested. This is
+            determined by the board that the service ID was originally retrieved from. All other
+            fields in this object are from the point of view of inspecting the service at this
+            location.
+
+        crs (str): the CRS code of the location at which this service was requested. See the
+            `location_name` attribute for more details.
+
+        operator (str): the name of the Train Operating Company that operates this service.
+
+        operator_code (str): the two-letter code identifying the Train Operating Company that
+            operates this service. Please see the Open Rail Data Wiki `Toc Codes Page 
+            <http://nrodwiki.rockshore.net/index.php/TOC_Codes>`_ for the full list.
+
+        cancelled (boolean): when True, indicates that this service has been cancelled at this
+            location.
+
+        cancel_reason (str): if this service is canelled, the reason for this cancellation.
+
+        delay_reason (str): if this service is delayed, the reason for this delay.
+
+        overdue_message (str): if a report on an expected movement of this service has not been
+            received on time, this attribute will contain a plain-English explanation of the report
+            which was expected.
+
+        length (int): the train length (in number of units). If this is set to 0 then the length
+            of the train is unknown.
+
+        detach_front (boolean): if True then the service detaches units from the front at this
+            location.
+
+        reverse_formation (boolean): if True then the service is operating in reverse formation
+            (i.e. the order of the train carriages is the reverse of what it normally is).
+
+        platform (str): the platform that this service will use at this location. This will only be
+            present where it is available from station CIS systems and where `platforms_available`
+            is set to True on the board from which this service was requested.
+
+        sta (str): the scheduled arrival time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes arrivals and there is an arrival event
+            scheduled at this location.
+
+        eta (str): the estimated arrival time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when there is an arrival event scheduled at this location. Only one of `eta`
+            and `ata` will be present at a time for a given service.
+
+        ata (str): the actual arrival time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when there is an arrival event scheduled at this location. Only one of `eta`
+            and `ata` will be present at a time for a given service.
+
+        std (str): the scheduled departure time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when the board requested includes departures and there is a departure event
+            scheduled at this location.
+
+        etd (str): the estimated departure time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when there is a departure event scheduled at this location. Only one of `etd`
+            and `atd` will be present at a time for a given service.
+
+        atd (str): the actual departure time of the service at this location. The value of the
+            field is as outlined in the :ref:`LDBWS Times Section<ldbws-times>`. This field is only
+            populated when there is a departure event scheduled at this location. Only one of `etd`
+            and `atd` will be present at a time for a given service.
+
+        adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
+
+        previous_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+            service before the location at which the board was requested. If there is more than one
+            inner list, the first list represents the through service, and the subsequent lists
+            represent associated services, with the location of the join being the final station on
+            each of the subsequent lists.
+
+        subsequent_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+            service after the location at which the board was requested. If there is more than one
+            inner list, the first list represents the through service, and the subsequent lists
+            represent associated services, with the location of the join being the first station on
+            each of the subsequent lists.
+    """
     field_map = [
             ('generated_at', make_simple_mapper('generatedAt')),
             ('rsid', make_simple_mapper('rsid')),
@@ -561,7 +655,5 @@ class ServiceDetails(SoapResponseObject):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceDetails, self).__init__(soap_response, *args, **kwargs)
-
-    # TODO: Document the properties.
 
 

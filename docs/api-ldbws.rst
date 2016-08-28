@@ -96,4 +96,11 @@ NextDeparturesItemWithCallingPoints
    :show-inheritance:
    :inherited-members:
 
+ServiceDetails
+--------------
+.. autoclass:: ServiceDetails
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 
