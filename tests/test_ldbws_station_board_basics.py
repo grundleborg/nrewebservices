@@ -36,7 +36,7 @@ class TestStationBoardDepartures(object):
         assert board.filter_location_name is None
         assert board.filter_crs is None
         assert board.filter_type is None
-        assert board.platform_available is True
+        assert board.platforms_available is True
         assert board.services_available is True
         
         # NRCC messages list.
