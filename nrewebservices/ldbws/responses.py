@@ -11,6 +11,15 @@ def make_nrcc_mapper(field_name):
         return messages
     return mapper
 
+def make_service_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            return ServiceItem(getattr(soap_response, field_name))
+        except AttributeError:
+            return None
+
+    return mapper
+
 def make_services_mapper(field_name):
     def mapper(soap_response):
         try:
@@ -20,6 +29,15 @@ def make_services_mapper(field_name):
 
         services = [ServiceItem(raw_service) for raw_service in raw_services]
         return services
+    return mapper
+
+def make_service_with_details_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            return ServiceItemWithCallingPoints(getattr(soap_response, field_name))
+        except AttributeError:
+            return None
+
     return mapper
 
 def make_services_with_details_mapper(field_name):
@@ -40,7 +58,7 @@ def make_next_departures_mapper(field_name):
         except AttributeError:
             raw_departures = []
 
-        departures = [DeparturesItem(raw_departure) for raw_departure in raw_departures]
+        departures = [NextDeparturesItem(raw_departure) for raw_departure in raw_departures]
         return departures
     return mapper
 
@@ -51,7 +69,7 @@ def make_next_departures_with_details_mapper(field_name):
         except AttributeError:
             raw_departures = []
 
-        departures = [DeparturesItemWithDetails(raw_departure) for raw_departure in raw_departures]
+        departures = [NextDeparturesItemWithCallingPoints(raw_departure) for raw_departure in raw_departures]
         return departures
     return mapper
 
@@ -489,7 +507,7 @@ class NextDeparturesItemBase(SoapResponseObject):
             departures to.
     """
     field_map = [
-            ('crs', make_simple_mapper('crs')),
+            ('crs', make_simple_mapper('_crs')),
     ]
 
 
@@ -499,10 +517,10 @@ class NextDeparturesItem(NextDeparturesItemBase):
     single location. You do not normally need to instantiate this class directly.
 
     Attributes:
-        services ([ServiceItem]): a list of the next services to depart to the requested location.
+        service (ServiceItem): the next service to depart to the requested location.
     """
     field_map = NextDeparturesItemBase.field_map + [
-            ('services', make_services_mapper('service')),
+            ('service', make_service_mapper('service')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):
@@ -518,11 +536,11 @@ class NextDeparturesItemWithCallingPoints(NextDeparturesItemBase):
     `get_service_details`. You do not normally need to instantiate this class directly.
 
     Attributes:
-        services ([ServiceItemWithCallingPoints]): a list of the next services to depart to the
-            requested location.
+        service (ServiceItemWithCallingPoints): the next service to depart to the requested
+            location.
     """
     field_map = NextDeparturesItemBase.field_map + [
-            ('services', make_services_with_details_mapper('service')),
+            ('service', make_service_with_details_mapper('service')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):

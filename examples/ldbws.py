@@ -32,7 +32,7 @@ except KeyError:
     sys.exit(1)
 
 ####################################################################################################
-# The interesting parts of the example begin here.
+# An example of getting a regular departure board.
 
 # Import the ldbws session class.
 from nrewebservices.ldbws import Session
@@ -58,4 +58,35 @@ for service in board.train_services:
         service.etd
     ))
 
+print()
 
+####################################################################################################
+# An example of getting the Next Departures to various locations board.
+
+# Import the ldbws session class.
+from nrewebservices.ldbws import Session
+
+# Instantiate the web service session.
+session = Session(API_URL, API_KEY)
+
+# Get a the next departures from Reading to Paddington and Oxford.
+board = session.get_next_departures("RDG", ["PAD", "OXF"])
+
+print("The next departures from {} to popular destinations are as follows:".format(board.location_name))
+
+# Loop over the departures.
+for departure in board.next_departures:
+
+    print("To {}:".format(departure.crs))
+
+    # Build a list of destinations for each train service.
+    destinations = [destination.location_name for destination in departure.service.destinations]
+
+    # Print some basic information about that train service.
+    print("    {} to {}: due {}.".format(
+        departure.service.std,
+        ",".join(destinations),
+        departure.service.etd
+    ))
+
+print()
