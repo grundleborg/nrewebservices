@@ -340,4 +340,120 @@ class Session(object):
         soap_response = query(**params)
         return NextDeparturesBoardWithDetails(soap_response)
 
+    def get_fastest_departures(self, crs, destinations, time_offset=None, time_window=None):
+        """
+        Get the fastest  public departures (within the supplied time window and offset) from the
+        station indicated by `crs` to the stations indicated by `destinations`. The difference
+        between this method and `get_next_departures` is that for each destination, the train which
+        arrives first at the destination out of the next departures from this station is returned,
+        rather than the one which departs from this station first.
+
+        Args:
+            crs (str): the CRS code of the station for which this board is being fetched.
+
+            destinations ([str]): a list of CRS codes representing the stations for which the next
+                departure from `crs` will be fetched. This parameter must contain at least 1, but no
+                more than 25 station CRS codes.
+
+            time_offset (int, from -120 to 120): An offset in minutes against the current time which
+                determines the starting point of the time window for which services are returned. If
+                set to `None`, the value of 0 will be used.
+
+            time_window (int, from -120 to 120): How far into the future from the value passed as
+                `time_offset` should services be fetched. If the value passed is negative, the time
+                window starts before the value of `time_offset` and ends at `time_offset`. If `None`
+                is passed, the default value is 120.
+
+        Returns:
+            NextDeparturesBoard: a `NextDeparturesBoard` object containing the station details and
+            the fastest departures to each of the requested destinations.
+
+        Raises:
+            ValueError: if `destinations` is not a list of between 1 and 25 values.
+
+        Note:
+            Each time this his method is called, it makes **1** request to the LDBWS server.
+        """
+
+        # Get the appropriate SOAP query method.
+        query = self._service.GetFastestDepartures
+
+        # Construct the query parameters.
+        params = {}
+        params['crs'] = crs
+        if 1 <= len(destinations) <= 25:
+            params['filterList'] = {"crs": destinations}
+        else:
+            raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")
+        if time_offset is not None:
+            params['timeOffset'] = time_offset
+        if time_window is not None:
+            params['timeWindow'] = time_window
+
+        # Do the SOAP query.
+        # TODO: Some form of error handling.
+        soap_response = query(**params)
+        return NextDeparturesBoard(soap_response)
+
+    def get_fastest_departures_with_details(self, crs, destinations, time_offset=None,
+            time_window=None):
+        """
+        Get the fastest  public departures (within the supplied time window and offset) from the
+        station indicated by `crs` to the stations indicated by `destinations`. The difference
+        between this method and `get_next_departures_with_details` is that for each destination, the
+        train which arrives first at the destination out of the next departures from this station is
+        returned, rather than the one which departs from this station first.
+
+        This method is identical in arguments and result to  `get_fastest_departures`, except that
+        the returned result is of type `NextDeparturesBoardWithDetails`, which includes the calling
+        points on the services, allowing access to them without an additional call to
+        `get_service_details` for each service.
+
+        Args:
+            crs (str): the CRS code of the station for which this board is being fetched.
+
+            destinations ([str]): a list of CRS codes representing the stations for which the next
+                departure from `crs` will be fetched. This parameter must contain at least 1, but no
+                more than 25 station CRS codes.
+
+            time_offset (int, from -120 to 120): An offset in minutes against the current time which
+                determines the starting point of the time window for which services are returned. If
+                set to `None`, the value of 0 will be used.
+
+            time_window (int, from -120 to 120): How far into the future from the value passed as
+                `time_offset` should services be fetched. If the value passed is negative, the time
+                window starts before the value of `time_offset` and ends at `time_offset`. If `None`
+                is passed, the default value is 120.
+
+        Returns:
+            NextDeparturesBoardWithDetails: a `NextDeparturesBoardWithDetails` object containing the
+            station details and the fastest departures to each of the requested destinations.
+
+        Raises:
+            ValueError: if `destinations` is not a list of between 1 and 25 values.
+
+        Note:
+            Each time this his method is called, it makes **1** request to the LDBWS server.
+        """
+
+        # Get the appropriate SOAP query method.
+        query = self._service.GetNextDeparturesWithDetails
+
+        # Construct the query parameters.
+        params = {}
+        params['crs'] = crs
+        if 1 <= len(destinations) <= 25:
+            params['filterList'] = {"crs": destinations}
+        else:
+            raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")
+        if time_offset is not None:
+            params['timeOffset'] = time_offset
+        if time_window is not None:
+            params['timeWindow'] = time_window
+
+        # Do the SOAP query.
+        # TODO: Some form of error handling.
+        soap_response = query(**params)
+        return NextDeparturesBoardWithDetails(soap_response)
+
 
