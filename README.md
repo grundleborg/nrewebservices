@@ -1,13 +1,27 @@
-nre-web-services
-================
+NREWebServices
+==============
 
-A python client for the National Rail Enquiries web services, including:
+A Python 2/3 client for the National Rail Enquiries web services.
+
+Supported Web Services
+----------------------
+
+The following NRE web services are currently supported by this library.
 
 * Darwin Live Departure Boards (ldbws)
+
+Usage
+-----
+
+Please read the included documentation for more information on using this library.
+
+Under Development
+-----------------
+
+Classes for accessing the following NRE web services are still under development, and not yet ready
+for general usage:
+
 * Darwin Live Departure Boards - Staff Version (staff)
 * Historical Performance Information (historical)
-
-This library is currently in the early stages of implementation. This README will be updated once
-there has been more development progress.
 
 
