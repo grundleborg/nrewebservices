@@ -8,7 +8,7 @@ from suds.sax.element import Element
 import logging
 
 log = logging.getLogger(__name__)
-LDBWS_NAMESPACE = ('com','http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes')
+ACCESS_TOKEN_NAMESPACE = 'http://thalesgroup.com/RTTI/2013-11-28/Token/types'
 
 class Session(object):
     """
@@ -63,10 +63,9 @@ class Session(object):
         self._service = self._soap_client.service['LDBServiceSoap']
 
         # Build the SOAP authentication headers.
-        access_token = Element('AccessToken', ns=LDBWS_NAMESPACE)
-        access_token_value = Element('TokenValue', ns=LDBWS_NAMESPACE)
-        access_token_value.setText(api_key)
-        access_token.append(access_token_value)
+        access_token = self._soap_client.factory.create('{{{}}}AccessToken'.format(
+            ACCESS_TOKEN_NAMESPACE))
+        access_token.TokenValue = api_key
         self._soap_client.set_options(soapheaders=(access_token))
 
     def get_station_board(self, crs, rows=10, include_departures=True, include_arrivals=False,
