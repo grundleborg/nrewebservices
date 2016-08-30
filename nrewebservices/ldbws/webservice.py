@@ -1,4 +1,5 @@
 from .responses import NextDeparturesBoard, NextDeparturesBoardWithDetails
+from .responses import ServiceDetails
 from .responses import StationBoard, StationBoardWithDetails
 
 from suds.client import Client
@@ -455,5 +456,32 @@ class Session(object):
         # TODO: Some form of error handling.
         soap_response = query(**params)
         return NextDeparturesBoardWithDetails(soap_response)
+
+    def get_service_details(self, service_id):
+        """
+        Get the full details of a service from a board.
+
+        Args:
+            service_id (str): the service_id of the relevant ServiceItem on the board.
+
+        Returns:
+            ServiceDetails: a `ServiceDetails` object containing the details of the requested
+            service.
+
+        Note:
+            Each time this his method is called, it makes **1** request to the LDBWS server.
+        """
+
+        # Get the appropriate SOAP query method.
+        query = self._service.GetServiceDetails
+
+        # Construct the query parameters.
+        params = {}
+        params['serviceID'] = service_id
+
+        # Do the SOAP query.
+        # TODO: Some form of error handling.
+        soap_response = query(**params)
+        return ServiceDetails(soap_response)
 
 
