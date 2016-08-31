@@ -75,22 +75,71 @@ class TestStationBoardDepartures(object):
         assert service.rsid == "SN083300"
 
     def test_station_board_train_service_origin_basics(self, board):
-        # Basic service location properties.
-        origin = board.train_services[1].origins[0]
+        service = board.train_services[1]
+        origin = service.origins[0]
+        assert len(service.origins) == 1
         assert origin.location_name == "Horsham"
         assert origin.crs == "HRH"
         assert origin.via is None
         assert origin.future_change_to is None
         assert origin.association_is_cancelled is None
 
-    # TODO:
-    #   - Test Destination.
-    #   - Test one with a Bus Service.
-    #   - Test one with a Ferry Service.
-    #   - Test one with a via location filled in.
-    #   - Test one with a current origin.
-    #   - Test one with a current destination.
-    #   - Test one with the platforms hidden.
-    #   - Test one with the services hidden.
+    def test_station_board_train_service_destination_basics(self, board):
+        service = board.train_services[1]
+        destination = service.destinations[0]
+        assert len(service.destinations) == 1
+        assert destination.location_name == "London Victoria"
+        assert destination.crs == "VIC"
+        assert destination.via is None
+        assert destination.future_change_to is None
+        assert destination.association_is_cancelled is None
+
+    def test_station_board_train_service_two_destinations(self, board):
+        service = board.train_services[0]
+        destination = service.destinations[0]
+        assert len(service.destinations) == 2
+        assert destination.location_name == "Hastings"
+        assert destination.crs == "HGS"
+        assert destination.via is None
+        assert destination.future_change_to is None
+        assert destination.association_is_cancelled is None
+        destination = service.destinations[1]
+        assert destination.location_name == "Littlehampton"
+        assert destination.crs == "LIT"
+        assert destination.via == "via Hove & Worthing"
+        assert destination.future_change_to is None
+        assert destination.association_is_cancelled is None
+
+    def test_station_board_train_service_time_on_time(self, board):
+        service = board.train_services[3]
+        assert service.etd == "On time"
+
+    def test_station_board_train_service_length(self, board):
+        service = board.train_services[0]
+        assert service.length == "12"
+
+    def test_station_board_train_service_delay_reason(self, board):
+        service = board.train_services[0]
+        assert service.delay_reason == "This train has been delayed by a shortage of train crew"
+
+# TODO:
+#   - Test one with the arrival times set.
+#   - Test one with a Bus Service.
+#   - Test one with a Ferry Service.
+#   - Test one with a current origin.
+#   - Test one with a current destination.
+#   - Test one with the platforms hidden.
+#   - Test one with the services hidden.
+#   - Test one with a Future Change To on and origin or destination.
+#   - Test one where an association is cancelled on an origin or destination.
+#   - Test one that's cancelled.
+#   - Test one with filter location cancelled.
+#   - Test one with a filter.
+#   - Test one with a circular route.
+#   - Test one with detach front.
+#   - Test one with reverse formation.
+#   - Test one with a delay reason.
+#   - Test one with a cancel reason.
+#   - Test one with an adhoc alert.
 
 
