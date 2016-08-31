@@ -321,7 +321,7 @@ class ServiceItemBase(SoapResponseObject):
         service_type (str): the type of transport this service consists of. Can be *train*, *bus* or
             *ferry*.
         
-        length (int): the train length (in number of units). If this is set to 0 then the length
+        length (str): the train length (in number of units). If this is set to 0 then the length
             of the train is unknown.
 
         detach_front (boolean): if True then the service detaches units from the front at this
@@ -473,7 +473,7 @@ class CallingPoint(SoapResponseObject):
 
         cancelled (boolean): when True, indicates that this service is cancelled at this location.
 
-        length (int): the train length (in number of units). If this is set to 0 then the length of
+        length (str): the train length (in number of units). If this is set to 0 then the length of
             the train is unknown.
 
         detach_front (boolean): if True then the service detaches units from the front at this
@@ -587,7 +587,7 @@ class ServiceDetails(SoapResponseObject):
             received on time, this attribute will contain a plain-English explanation of the report
             which was expected.
 
-        length (int): the train length (in number of units). If this is set to 0 then the length
+        length (str): the train length (in number of units). If this is set to 0 then the length
             of the train is unknown.
 
         detach_front (boolean): if True then the service detaches units from the front at this
