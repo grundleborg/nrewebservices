@@ -1,3 +1,4 @@
+bumpversion
 pytest
 sphinx
 sphinx-autobuild
