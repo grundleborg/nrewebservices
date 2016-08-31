@@ -1,3 +1,5 @@
+[![Travis CI Build Status](https://img.shields.io/travis/grundleborg/nrewebservices.svg)](https://travis-ci.org/grundleborg/nrewebservices)
+
 NREWebServices
 ==============
 
