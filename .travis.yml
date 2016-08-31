@@ -8,5 +8,6 @@ python:
   - "3.5-dev"
   - "nightly"
 install: "pip install -r requirements.txt -r requirements-dev.txt"
-script: py.test
-
+script: py.test --cov=./nrewebservices
+after_success:
+      - bash <(curl -s https://codecov.io/bash)
