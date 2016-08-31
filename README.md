@@ -1,4 +1,6 @@
 [![Travis CI Build Status](https://img.shields.io/travis/grundleborg/nrewebservices.svg)](https://travis-ci.org/grundleborg/nrewebservices)
+[![Codecov Coverage Checker](https://img.shields.io/codecov/c/github/grundleborg/nrewebservices.svg)](https://codecov.io/gh/grundleborg/nrewebservices)
+[![ReadTheDocs Documentation](https://readthedocs.org/projects/nrewebservices/badge)](https://nrewebservices.readthedocs.io)
 
 NREWebServices
 ==============
