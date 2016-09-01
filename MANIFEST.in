@@ -1,0 +1,11 @@
+include *.md *.rst *.txt LICENSE
+
+recursive-include examples *
+
+include docs/Makefile docs/make.bat
+recursive-include docs *.rst
+recursive-include docs *.py
+prune docs/_build
+
+recursive-include tests *
+

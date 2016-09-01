@@ -3,3 +3,8 @@ __pycache__
 .cache
 docs/_build
 .coverage
+
+# SetupTools artifacts.
+build/
+dist/
+nrewebservices.egg-info/
