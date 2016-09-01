@@ -1,1 +1,1 @@
-release = '0.1.0-dev'
+release = '0.1.0'
