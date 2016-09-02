@@ -340,6 +340,8 @@ class ServiceItemBase(SoapResponseObject):
             and will expire and stop working within a few hours of the service being deactivated.
 
         adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
+        
+        rsid (str): the Retail Service ID of the service, if known by the Darwin system.
     """
 
     field_map = [
@@ -365,6 +367,7 @@ class ServiceItemBase(SoapResponseObject):
             ('delay_reason', make_simple_mapper('delayReason')),
             ('service_id', make_simple_mapper('serviceID')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
+            ('rsid', make_simple_mapper('rsid')),
     ]
 
 
@@ -372,14 +375,7 @@ class ServiceItem(ServiceItemBase):
     """
     This class represents a single service that appears on an arrival/departure board. You do not
     normally need to instantiate this class directly.
-
-    Attributes:
-        rsid (str): the Retail Service ID of the service, if known by the Darwin system.
     """
-
-    field_map = ServiceItemBase.field_map + [
-            ('rsid', make_simple_mapper('rsid')),
-    ]
 
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceItem, self).__init__(soap_response, *args, **kwargs)
