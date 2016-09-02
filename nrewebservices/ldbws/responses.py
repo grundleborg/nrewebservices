@@ -209,7 +209,7 @@ class StationBoardWithDetails(BoardBase):
     field_map = BoardBase.field_map + [
             ('train_services', make_services_with_details_mapper('trainServices')),
             ('bus_services', make_services_with_details_mapper('busServices')),
-            ('train_services', make_services_with_details_mapper('ferryServices')),
+            ('ferry_services', make_services_with_details_mapper('ferryServices')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):
