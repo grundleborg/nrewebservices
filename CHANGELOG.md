@@ -6,6 +6,8 @@ v0.1.1-dev
   objects.
 * Move rsid from ServiceItem to ServiceItemBase as ServiceItemWithCallingPoints does have this
   property too, even though the official documentation claims otherwise.
+* Fix bug where ServiceItemWithCallingPoints did not have the double-nesting of calling points lists
+  and also fix the mapper generator for decoding these lists-of-lists.
 
 v0.1.0
 ======

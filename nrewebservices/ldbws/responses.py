@@ -87,12 +87,20 @@ def make_service_locations_mapper(field_name):
 def make_calling_points_mapper(field_name):
     def mapper(soap_response):
         try:
-            raw_calling_points = getattr(getattr(soap_response, field_name), 'callingPointList')
+            raw_calling_point_lists = getattr(getattr(soap_response, field_name), 'callingPointList')
         except AttributeError:
-            raw_calling_points = []
+            raw_calling_point_lists = []
 
-        calling_points = [CallingPoint(raw_calling_point) for raw_calling_point in raw_calling_points]
-        return calling_points
+        calling_point_lists = []
+        for raw_calling_point_list in raw_calling_point_lists:
+            try:
+                raw_calling_points = getattr(raw_calling_point_list, 'callingPoint')
+            except AttributeError:
+                raw_calling_points = []
+
+            calling_points = [CallingPoint(raw_calling_point) for raw_calling_point in raw_calling_points]
+            calling_point_lists.append(calling_points)
+        return calling_point_lists
     return mapper
 
 class BoardBase(SoapResponseObject):
@@ -390,11 +398,19 @@ class ServiceItemWithCallingPoints(ServiceItemBase):
     class directly.
 
     Attributes:
-        previous_calling_points ([CallingPoint]): a list of all calling points on this service
-            before the location at which the board was requested.
+        previous_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+            service before the location at which the board was requested. If there is more than one
+            inner list, the first list represents the through service, and the subsequent lists
+            represent associated services, with the location of the join being the final station on
+            each of the subsequent lists. This is property is only populated when requesting a an
+            arrivals or arrivals/departures board.
 
-        subsequent_calling_points ([CallingPoint]): a list of all calling points on this service
-            after the location at which the board was requested.
+        subsequent_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+            service before the location at which the board was requested. If there is more than one
+            inner list, the first list represents the through service, and the subsequent lists
+            represent associated services, with the location of the join being the final station on
+            each of the subsequent lists. This property is only populated when requesting a
+            departures or arrivals/departures board.
     """
     field_map = ServiceItemBase.field_map + [
             ('previous_calling_points', make_calling_points_mapper('previousCallingPoints')),
