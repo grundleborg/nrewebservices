@@ -10,6 +10,7 @@ v0.1.1-dev
   and also fix the mapper generator for decoding these lists-of-lists.
 * Fix default values of CallingPoint detach_front and cancelled properties (should return False when
   not present in the web service response).
+* Fix default values of ServiceDetails reverse_formation, cancelled and detach_front to be False.
 
 v0.1.0
 ======
