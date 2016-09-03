@@ -8,6 +8,8 @@ v0.1.1-dev
   property too, even though the official documentation claims otherwise.
 * Fix bug where ServiceItemWithCallingPoints did not have the double-nesting of calling points lists
   and also fix the mapper generator for decoding these lists-of-lists.
+* Fix default values of CallingPoint detach_front and cancelled properties (should return False when
+  not present in the web service response).
 
 v0.1.0
 ======

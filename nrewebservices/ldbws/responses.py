@@ -499,9 +499,9 @@ class CallingPoint(SoapResponseObject):
             ('st', make_simple_mapper('st')),
             ('et', make_simple_mapper('et')),
             ('at', make_simple_mapper('at')),
-            ('cancelled', make_simple_mapper('isCancelled')),
+            ('cancelled', make_boolean_mapper('isCancelled')),
             ('length', make_simple_mapper('length')),
-            ('detach_front', make_simple_mapper('detachFront')),
+            ('detach_front', make_boolean_mapper('detachFront')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
     ]
 
