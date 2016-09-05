@@ -1,5 +1,5 @@
-v0.1.1-dev
-==========
+v0.1.1
+======
 
 * Improved test coverage for LDBWS.
 * Fix a bug where the ferry services overwrote the train services in StationBoardWithDetails
