@@ -6,6 +6,7 @@ from suds.client import Client
 from suds.sax.element import Element
 
 import logging
+import os
 
 log = logging.getLogger(__name__)
 ACCESS_TOKEN_NAMESPACE = 'http://thalesgroup.com/RTTI/2013-11-28/Token/types'

@@ -1,4 +1,9 @@
 v0.1.2-dev
+==========
+
+* Fix exception when getting LDBWS WSDL or API KEy from environment variables.
+
+v0.1.1
 ======
 
 * Improved test coverage for LDBWS.
