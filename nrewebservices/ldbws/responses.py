@@ -149,7 +149,7 @@ class BoardBase(SoapResponseObject):
             ('location_name', make_simple_mapper('locationName')),
             ('crs', make_simple_mapper('crs')),
             ('filter_location_name', make_simple_mapper('filterLocationName')),
-            ('filter_crs', make_simple_mapper('filterCrs')),
+            ('filter_crs', make_simple_mapper('filtercrs')),
             ('filter_type', make_simple_mapper('filterType')),
             ('platforms_available', make_boolean_mapper('platformAvailable')),
             ('services_available', make_boolean_mapper('areServicesAvailable', True)),
