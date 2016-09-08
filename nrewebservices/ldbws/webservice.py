@@ -64,7 +64,7 @@ class Session(object):
         self._service = self._soap_client.service['LDBServiceSoap']
 
         # Build the SOAP authentication headers.
-        access_token = self._soap_client.factory.create('{{{}}}AccessToken'.format(
+        access_token = self._soap_client.factory.create('{{{0}}}AccessToken'.format(
             ACCESS_TOKEN_NAMESPACE))
         access_token.TokenValue = api_key
         self._soap_client.set_options(soapheaders=(access_token))
