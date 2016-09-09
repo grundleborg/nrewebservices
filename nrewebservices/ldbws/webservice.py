@@ -270,7 +270,7 @@ class Session(object):
         # Construct the query parameters.
         params = {}
         params['crs'] = crs
-        if 1 <= len(destinations) <= 25:
+        if type(destinations) is list and 1 <= len(destinations) <= 25:
             params['filterList'] = {"crs": destinations}
         else:
             raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")
@@ -327,7 +327,7 @@ class Session(object):
         # Construct the query parameters.
         params = {}
         params['crs'] = crs
-        if 1 <= len(destinations) <= 25:
+        if type(destinations) is list and 1 <= len(destinations) <= 25:
             params['filterList'] = {"crs": destinations}
         else:
             raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")
@@ -382,7 +382,7 @@ class Session(object):
         # Construct the query parameters.
         params = {}
         params['crs'] = crs
-        if 1 <= len(destinations) <= 25:
+        if type(destinations) is list and 1 <= len(destinations) <= 25:
             params['filterList'] = {"crs": destinations}
         else:
             raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")
@@ -443,7 +443,7 @@ class Session(object):
         # Construct the query parameters.
         params = {}
         params['crs'] = crs
-        if 1 <= len(destinations) <= 25:
+        if type(destinations) is list and 1 <= len(destinations) <= 25:
             params['filterList'] = {"crs": destinations}
         else:
             raise ValueError("destinations parameter should be a list of at least 1 but no more than 25 CRS codes.")

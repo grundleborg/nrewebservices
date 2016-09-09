@@ -4,6 +4,8 @@ v0.1.2-dev
 * Fix exception when getting LDBWS WSDL or API KEy from environment variables.
 * Fix BoardBase.filter_crs property mapping so it is now correctly populated.
 * Fix python 2.6 compatability.
+* Extra check in get_[fastest|next]_departures[_with_details] methods to ensure that the
+  destinations parameter is actually a list.
 
 v0.1.1
 ======
