@@ -239,4 +239,160 @@ class TestSession(object):
         # TODO: Investigate why filter_type is None, not "to".
         assert r.filter_type == "to"
 
+    def test_get_next_departures_basic(self, session):
+        r = session.get_next_departures("PAD", ["RDG", "TWY"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 2
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+
+    def test_get_next_departures_not_a_list(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures("PAD", "RDG")
+
+    def test_get_next_departures_too_few(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures("PAD", [])
+
+    def test_get_next_departures_too_many(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures("PAD", ["RDG", "TWY", "PLY", "PNZ", "WAT", "WIN", "BRI", "STP", "LEI", "MIM", "OXF", "CBG", "ABY", "STS", "LSK", "CSK", "GSL", "CLJ", "WIJ", "WAT", "MKC", "BIR", "BMS", "BSH", "MYB", "OPY"])
+
+    def test_get_next_departures_repeated(self, session):
+        r = session.get_next_departures("PAD", ["RDG", "TWY", "RDG"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 3
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+        assert r.next_departures[2].crs == "RDG"
+
+    def test_get_next_departures_with_details_basic(self, session):
+        r = session.get_next_departures_with_details("PAD", ["RDG", "TWY"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 2
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+
+    def test_get_next_departures_with_details_not_a_list(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures_with_details("PAD", "RDG")
+
+    def test_get_next_departures_with_details_too_few(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures_with_details("PAD", [])
+
+    def test_get_next_departures_with_details_too_many(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_next_departures_with_details("PAD", ["RDG", "TWY", "PLY", "PNZ", "WAT", "WIN", "BRI", "STP", "LEI", "MIM", "OXF", "CBG", "ABY", "STS", "LSK", "CSK", "GSL", "CLJ", "WIJ", "WAT", "MKC", "BIR", "BMS", "BSH", "MYB", "OPY"])
+
+    def test_get_next_departures_with_details_repeated(self, session):
+        r = session.get_next_departures_with_details("PAD", ["RDG", "TWY", "RDG"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 3
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+        assert r.next_departures[2].crs == "RDG"
+
+    def test_get_fastest_departures_basic(self, session):
+        r = session.get_fastest_departures("PAD", ["RDG", "TWY"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 2
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+
+    def test_get_fastest_departures_not_a_list(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures("PAD", "RDG")
+
+    def test_get_fastest_departures_too_few(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures("PAD", [])
+
+    def test_get_fastest_departures_too_many(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures("PAD", ["RDG", "TWY", "PLY", "PNZ", "WAT", "WIN", "BRI", "STP", "LEI", "MIM", "OXF", "CBG", "ABY", "STS", "LSK", "CSK", "GSL", "CLJ", "WIJ", "WAT", "MKC", "BIR", "BMS", "BSH", "MYB", "OPY"])
+
+    def test_get_next_fastestrtures_repeated(self, session):
+        r = session.get_fastest_departures("PAD", ["RDG", "TWY", "RDG"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 3
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+        assert r.next_departures[2].crs == "RDG"
+
+    def test_get_fastest_departures_with_details_basic(self, session):
+        r = session.get_fastest_departures_with_details("PAD", ["RDG", "TWY"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 2
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+
+    def test_get_fastest_departures_with_details_not_a_list(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures_with_details("PAD", "RDG")
+
+    def test_get_fastest_departures_with_details_too_few(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures_with_details("PAD", [])
+
+    def test_get_fastest_departures_with_details_too_many(self, session):
+        with pytest.raises(ValueError):
+            r = session.get_fastest_departures_with_details("PAD", ["RDG", "TWY", "PLY", "PNZ", "WAT", "WIN", "BRI", "STP", "LEI", "MIM", "OXF", "CBG", "ABY", "STS", "LSK", "CSK", "GSL", "CLJ", "WIJ", "WAT", "MKC", "BIR", "BMS", "BSH", "MYB", "OPY"])
+
+    def test_get_fastest_departures_with_details_repeated(self, session):
+        r = session.get_fastest_departures_with_details("PAD", ["RDG", "TWY", "RDG"])
+
+        assert r.location_name == "London Paddington"
+        assert r.crs == "PAD"
+        assert r.filter_location_name is None
+        assert r.filter_crs is None
+        assert r.filter_type is None
+        assert len(r.next_departures) == 3
+
+        assert r.next_departures[0].crs == "RDG"
+        assert r.next_departures[1].crs == "TWY"
+        assert r.next_departures[2].crs == "RDG"
+
 
