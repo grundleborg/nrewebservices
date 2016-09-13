@@ -12,7 +12,7 @@ setup(
     version='0.1.2-dev',
     packages=find_packages(),
     description='A Python 2/3 library for accessing the National Rail Enquiries web service APIs.',
-    long_description=(read('README.md')),
+    long_description=(read('README.rst')),
     url='https://github.com/grundleborg/nrewebservices',
     license='BSD',
     author='George Goldberg',
