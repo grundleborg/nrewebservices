@@ -348,3 +348,8 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #
 # texinfo_no_detailmenu = False
+
+# Napoleon Settings
+#
+# Don't auto-doc the special methods on classes.
+napoleon_include_special_with_doc = False
