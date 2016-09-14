@@ -11,7 +11,7 @@ Follow the steps in this guide to roll a new release of NRE Web Services.
    development version below, e.g. to bump the minor release number:
    ::
 
-        bumpversion minor
+        bumpversion minor --no-tag
 
 #. Check the tests pass:
    ::
