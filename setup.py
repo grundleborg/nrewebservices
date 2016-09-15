@@ -9,7 +9,7 @@ def read(*paths):
 
 setup(
     name='nrewebservices',
-    version='0.1.3-dev',
+    version='0.1.3',
     packages=find_packages(),
     description='A Python 2/3 library for accessing the National Rail Enquiries web service APIs.',
     long_description=(read('README.rst')),
