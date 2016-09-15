@@ -2,8 +2,13 @@
 Change Log
 ----------
 
-v0.1.2
+v0.1.3-dev
 ==========
+
+
+
+v0.1.2
+======
 
 * Fix exception when getting LDBWS WSDL or API KEy from environment variables.
 * Fix BoardBase.filter_crs property mapping so it is now correctly populated.
