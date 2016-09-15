@@ -2,10 +2,15 @@
 Change Log
 ----------
 
-v0.1.3
+v0.1.4-dev
 ==========
 
 
+
+v0.1.3
+======
+
+* Fresh release due to messing up v0.1.2 upload to PyPI.
 
 v0.1.2
 ======
