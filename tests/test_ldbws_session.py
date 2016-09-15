@@ -4,6 +4,8 @@ import sys
 testsPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, testsPath + '/../')
 
+from suds import WebFault
+
 import os
 import pytest
 
@@ -394,5 +396,18 @@ class TestSession(object):
         assert r.next_departures[0].crs == "RDG"
         assert r.next_departures[1].crs == "TWY"
         assert r.next_departures[2].crs == "RDG"
+
+    def test_get_service(self, session):
+        r = session.get_station_board("PAD", include_departures=True, include_arrivals=False)
+        assert len(r.train_services) > 0
+
+        s = session.get_service_details(r.train_services[0].service_id)
+
+        assert s.crs == "PAD"
+
+    def test_get_service_invalid_id(self, session):
+        # TODO: Wrap up SUDS errors in something more helpful in the API.
+        with pytest.raises(WebFault):
+            s = session.get_service_details("lalalalala")
 
 
