@@ -2,7 +2,7 @@
 Change Log
 ----------
 
-v0.1.2-dev
+v0.1.2
 ==========
 
 * Fix exception when getting LDBWS WSDL or API KEy from environment variables.
