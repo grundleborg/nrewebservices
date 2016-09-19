@@ -69,6 +69,11 @@ class Session(object):
         access_token.TokenValue = api_key
         self._soap_client.set_options(soapheaders=(access_token))
 
+    def _do_soap_query(self, query, parameters):
+        # TODO: Some form of error handling.
+        soap_response = query(**parameters)
+        return soap_response
+
     def get_station_board(self, crs, rows=10, include_departures=True, include_arrivals=False,
             from_filter_crs=None, to_filter_crs=None, time_offset=None, time_window=None):
         """
@@ -144,9 +149,7 @@ class Session(object):
             params['timeWindow'] = time_window
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return StationBoard(soap_response)
+        return StationBoard(self._do_soap_query(query, params))
 
     def get_station_board_with_details(self, crs, rows=10, include_departures=True,
             include_arrivals=False, from_filter_crs=None, to_filter_crs=None, time_offset=None,
@@ -228,9 +231,7 @@ class Session(object):
             params['timeWindow'] = time_window
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return StationBoardWithDetails(soap_response)
+        return StationBoardWithDetails(self._do_soap_query(query, params))
 
     def get_next_departures(self, crs, destinations, time_offset=None, time_window=None):
         """
@@ -280,9 +281,7 @@ class Session(object):
             params['timeWindow'] = time_window
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return NextDeparturesBoard(soap_response)
+        return NextDeparturesBoard(self._do_soap_query(query, params))
 
     def get_next_departures_with_details(self, crs, destinations, time_offset=None, time_window=None):
         """
@@ -337,9 +336,7 @@ class Session(object):
             params['timeWindow'] = time_window
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return NextDeparturesBoardWithDetails(soap_response)
+        return NextDeparturesBoardWithDetails(self._do_soap_query(query, params))
 
     def get_fastest_departures(self, crs, destinations, time_offset=None, time_window=None):
         """
@@ -453,9 +450,7 @@ class Session(object):
             params['timeWindow'] = time_window
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return NextDeparturesBoardWithDetails(soap_response)
+        return NextDeparturesBoardWithDetails(self._do_soap_query(query, params))
 
     def get_service_details(self, service_id):
         """
@@ -480,8 +475,6 @@ class Session(object):
         params['serviceID'] = service_id
 
         # Do the SOAP query.
-        # TODO: Some form of error handling.
-        soap_response = query(**params)
-        return ServiceDetails(soap_response)
+        return ServiceDetails(self._do_soap_query(query, params))
 
 
