@@ -103,6 +103,20 @@ def make_calling_points_mapper(field_name):
         return calling_point_lists
     return mapper
 
+def make_location_text_mapper(field_name):
+    def mapper(target):
+        try:
+            text_items = []
+            for i in getattr(target, field_name):
+                item_text = i.location_name
+                if i.via is not None:
+                    item_text += ' ' + i.via
+                text_items.append(item_text)
+            return ', '.join(text_items)
+        except AttributeError:
+            return ''
+    return mapper
+
 class BoardBase(SoapResponseObject):
     """
     This class acts as the base class containing the common attributes for the various classes that
@@ -350,6 +364,12 @@ class ServiceItemBase(SoapResponseObject):
         adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
         
         rsid (str): the Retail Service ID of the service, if known by the Darwin system.
+
+        origin (str): the origin (or origins) of this service as a single string which is suitable
+            for display directly to users.
+
+        destination (str): the destination (or destinations) of this service as a single string
+            which is suitable for display directly to users.
     """
 
     field_map = [
@@ -376,6 +396,11 @@ class ServiceItemBase(SoapResponseObject):
             ('service_id', make_simple_mapper('serviceID')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
             ('rsid', make_simple_mapper('rsid')),
+    ]
+
+    computed_field_map = [
+            ('origin', make_location_text_mapper("origins")),
+            ('destination', make_location_text_mapper("destinations")),
     ]
 
 

@@ -74,6 +74,8 @@ class TestFastestDeparturesBoardWithDetails(object):
         assert service.service_id == "1hHszdehfteYvCy6NbiPKw=="
         assert service.adhoc_alerts == None
         assert service.rsid == "SN078700"
+        assert service.origin == "London Victoria"
+        assert service.destination == "Brighton"
 
     def test_fastest_departures_board_with_details_service_calling_points(self, board):
         service = board.next_departures[1].service

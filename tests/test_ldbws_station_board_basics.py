@@ -74,8 +74,13 @@ class TestStationBoardDepartures(object):
         assert service.adhoc_alerts == None
         assert service.rsid == "SN083300"
 
+        # Computed properties.
+        assert service.origin == "Horsham"
+        assert service.destination == "London Victoria"
+
     def test_station_board_train_service_origin_basics(self, board):
         service = board.train_services[1]
+        service.origin == "Horsham"
         origin = service.origins[0]
         assert len(service.origins) == 1
         assert origin.location_name == "Horsham"
@@ -86,6 +91,7 @@ class TestStationBoardDepartures(object):
 
     def test_station_board_train_service_destination_basics(self, board):
         service = board.train_services[1]
+        assert service.destination == "London Victoria"
         destination = service.destinations[0]
         assert len(service.destinations) == 1
         assert destination.location_name == "London Victoria"
@@ -96,6 +102,7 @@ class TestStationBoardDepartures(object):
 
     def test_station_board_train_service_two_destinations(self, board):
         service = board.train_services[0]
+        assert service.destination == "Hastings, Littlehampton via Hove & Worthing"
         destination = service.destinations[0]
         assert len(service.destinations) == 2
         assert destination.location_name == "Hastings"

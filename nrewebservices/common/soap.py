@@ -5,6 +5,11 @@ class SoapResponseObject(object):
             value = mapper(soap_response)
             setattr(self, field, value)
 
+        if hasattr(self.__class__, 'computed_field_map'):
+            for field, mapper in self.__class__.computed_field_map:
+                value = mapper(self)
+                setattr(self, field, value)
+
 
 def make_simple_mapper(field_name):
     def mapper(soap_response):

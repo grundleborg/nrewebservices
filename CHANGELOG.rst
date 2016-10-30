@@ -5,7 +5,8 @@ Change Log
 v0.1.4-dev
 ==========
 
-
+* Convenience properties of board services *origin* and *destination* which provide a single string
+  suitable for display directly to users, instead of a list of objects.
 
 v0.1.3
 ======

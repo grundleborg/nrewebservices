@@ -74,6 +74,6 @@ class TestFastestDeparturesBoard(object):
         assert service.service_id == "1hHszdehfteYvCy6NbiPKw=="
         assert service.adhoc_alerts == None
         assert service.rsid == "SN078700"
-
-
+        assert service.origin == "London Victoria"
+        assert service.destination == "Brighton"
 

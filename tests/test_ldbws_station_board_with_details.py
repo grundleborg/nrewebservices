@@ -73,6 +73,8 @@ class TestStationBoardWithDetailsDepartures(object):
         assert service.service_id == "l4/FfBv9+LeshRsit6lwzw=="
         assert service.adhoc_alerts == None
         assert service.rsid == "SN083300"
+        assert service.origin == "Horsham"
+        assert service.destination == "London Victoria"
 
     def test_station_board_with_details_service_calling_points(self, board):
         service = board.train_services[1]
