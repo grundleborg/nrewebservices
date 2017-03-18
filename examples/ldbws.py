@@ -41,20 +41,17 @@ from nrewebservices.ldbws import Session
 session = Session(API_URL, API_KEY)
 
 # Get a departure board containing the next ten departures from Reading.
-board = session.get_station_board("RDG", rows=10, include_departures=True, include_arrivals=False)
+board = session.get_station_board("VIC", rows=50, include_departures=True, include_arrivals=False)
 
-print("The next 10 departures from {} are:".format(board.location_name))
+print("The next 50 departures from {} are:".format(board.location_name))
 
 # Loop over all the train services in that board.
 for service in board.train_services:
     
-    # Build a list of destinations for each train service.
-    destinations = [destination.location_name for destination in service.destinations]
-
     # Print some basic information about that train service.
     print("    {} to {}: due {}.".format(
         service.std,
-        ",".join(destinations),
+        service.destination,
         service.etd
     ))
 
