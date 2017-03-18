@@ -31,4 +31,14 @@ def make_boolean_mapper(field_name, default=False):
         return value
     return mapper
 
+def make_stripped_text_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            value = getattr(soap_response, field_name).strip()
+        except AttributeError:
+            value = None
+
+        return value
+    return mapper
+
 

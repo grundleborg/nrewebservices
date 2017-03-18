@@ -1,5 +1,5 @@
 from nrewebservices.common import SoapResponseObject
-from nrewebservices.common import make_boolean_mapper, make_simple_mapper
+from nrewebservices.common import make_boolean_mapper, make_simple_mapper, make_stripped_text_mapper
 
 def make_nrcc_mapper(field_name):
     def mapper(soap_response):
@@ -471,7 +471,7 @@ class ServiceLocation(SoapResponseObject):
     field_map = [
             ('location_name', make_simple_mapper('locationName')),
             ('crs', make_simple_mapper('crs')),
-            ('via', make_simple_mapper('via')),
+            ('via', make_stripped_text_mapper('via')),
             ('future_change_to', make_simple_mapper('futureChangeTo')),
             ('association_is_cancelled', make_simple_mapper('assocIsCancelled')),
     ]
