@@ -84,23 +84,26 @@ def make_service_locations_mapper(field_name):
         return locations
     return mapper
 
-def make_calling_points_mapper(field_name):
+def make_calling_point_lists_mapper(field_name):
     def mapper(soap_response):
         try:
             raw_calling_point_lists = getattr(getattr(soap_response, field_name), 'callingPointList')
         except AttributeError:
             raw_calling_point_lists = []
 
-        calling_point_lists = []
-        for raw_calling_point_list in raw_calling_point_lists:
-            try:
-                raw_calling_points = getattr(raw_calling_point_list, 'callingPoint')
-            except AttributeError:
-                raw_calling_points = []
-
-            calling_points = [CallingPoint(raw_calling_point) for raw_calling_point in raw_calling_points]
-            calling_point_lists.append(calling_points)
+        calling_point_lists = [CallingPointList(calling_point_list) for calling_point_list in raw_calling_point_lists]
         return calling_point_lists
+    return mapper
+
+def make_calling_points_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            raw_calling_points = getattr(soap_response, field_name)
+        except AttributeError:
+            raw_calling_points = []
+
+        calling_points = [CallingPoint(calling_point) for calling_point in raw_calling_points]
+        return calling_points
     return mapper
 
 def make_location_text_mapper(field_name):
@@ -423,23 +426,23 @@ class ServiceItemWithCallingPoints(ServiceItemBase):
     class directly.
 
     Attributes:
-        previous_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+        previous_calling_points ([CallingPointList]): a list of CallingPointList objects on this
             service before the location at which the board was requested. If there is more than one
-            inner list, the first list represents the through service, and the subsequent lists
-            represent associated services, with the location of the join being the final station on
-            each of the subsequent lists. This is property is only populated when requesting a an
-            arrivals or arrivals/departures board.
+            CallingPointList, the first list represents the through service, and the subsequent
+            lists represent associated services, with the location of the join being the fina
+            station on each of the subsequent lists. This is property is only populated when
+            requesting an arrivals or arrivals/departures board.
 
-        subsequent_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+        subsequent_calling_points ([CallingPoint]): a list of CallingPointList objects on this
             service before the location at which the board was requested. If there is more than one
-            inner list, the first list represents the through service, and the subsequent lists
-            represent associated services, with the location of the join being the final station on
-            each of the subsequent lists. This property is only populated when requesting a
-            departures or arrivals/departures board.
+            CallingPointList, the first list represents the through service, and the subsequent
+            lists represent associated services, with the location of the join being the final
+            station on each of the subsequent lists. This property is only populated when requesting
+            a departures or arrivals/departures board.
     """
     field_map = ServiceItemBase.field_map + [
-            ('previous_calling_points', make_calling_points_mapper('previousCallingPoints')),
-            ('subsequent_calling_points', make_calling_points_mapper('subsequentCallingPoints')),
+            ('previous_calling_points', make_calling_point_lists_mapper('previousCallingPoints')),
+            ('subsequent_calling_points', make_calling_point_lists_mapper('subsequentCallingPoints')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):
@@ -532,6 +535,44 @@ class CallingPoint(SoapResponseObject):
 
     def __init__(self, soap_response, *args, **kwargs):
         super(CallingPoint, self).__init__(soap_response, *args, **kwargs)
+
+
+class CallingPointList(SoapResponseObject):
+    """
+    This class represents a list of calling points along a service. You do not normally need to
+    instantiate this class directly.
+
+    Attributes:
+        calling_points ([CallingPoint]): the list of calling points this CallingPointList
+            represents.
+
+        service_type (str): the type of service these calling points are provided by. Can be either
+            'train', 'bus' or 'ferry'.
+
+        change_required (boolean): if True, passengers must change vehicles to access these calling
+            points.
+
+        association_is_cancelled (boolean): if True, the association between the service providing
+            these calling points and the through service has been cancelled, meaning these calling
+            points can no longer be reached on this service.
+
+    Note:
+        If a CallingPointList is treated as a regular python list, the calling_points property is
+        implicitly accessed.
+
+    """
+    field_map = [
+            ('calling_points', make_calling_points_mapper('callingPoint')),
+            ('service_type', make_simple_mapper('serviceType')),
+            ('change_required', make_boolean_mapper('serviceChangeRequired')),
+            ('association_is_cancelled', make_boolean_mapper('assocIsCancelled')),
+    ]
+
+    def __getitem__(self, item):
+        return self.calling_points[item]
+
+    def __len__(self):
+        return len(self.calling_points)
 
 
 class NextDeparturesItemBase(SoapResponseObject):
@@ -669,17 +710,17 @@ class ServiceDetails(SoapResponseObject):
 
         adhoc_alerts (str): a list of adhoc alerts to show for this service at this location.
 
-        previous_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+        previous_calling_points ([CallingPointList]): a list of CallingPointList objects on this
             service before the location at which the board was requested. If there is more than one
-            inner list, the first list represents the through service, and the subsequent lists
-            represent associated services, with the location of the join being the final station on
-            each of the subsequent lists.
+            CallingPointList, the first list represents the through service, and the subsequent
+            lists represent associated services, with the location of the join being the final
+            station on each of the subsequent lists.
 
-        subsequent_calling_points ([[CallingPoint]]): a list of lists of all calling points on this
+        subsequent_calling_points ([CallingPointList]): a list of CallingPointList objects on this
             service after the location at which the board was requested. If there is more than one
-            inner list, the first list represents the through service, and the subsequent lists
-            represent associated services, with the location of the join being the first station on
-            each of the subsequent lists.
+            CallingPointList, the first list represents the through service, and the subsequent
+            lists represent associated services, with the location of the join being the first
+            station on each of the subsequent lists.
     """
     field_map = [
             ('generated_at', make_simple_mapper('generatedAt')),
@@ -704,8 +745,8 @@ class ServiceDetails(SoapResponseObject):
             ('etd', make_simple_mapper('etd')),
             ('atd', make_simple_mapper('atd')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
-            ('previous_calling_points', make_calling_points_mapper('previousCallingPoints')),
-            ('subsequent_calling_points', make_calling_points_mapper('subsequentCallingPoints')),
+            ('previous_calling_points', make_calling_point_lists_mapper('previousCallingPoints')),
+            ('subsequent_calling_points', make_calling_point_lists_mapper('subsequentCallingPoints')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):

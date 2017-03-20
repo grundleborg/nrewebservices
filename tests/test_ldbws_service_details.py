@@ -67,6 +67,13 @@ class TestServiceDetails(object):
         assert len(pcp) == 2
         assert len(scp) == 18
 
+        assert pcp.service_type == None
+        assert pcp.change_required == False
+        assert pcp.association_is_cancelled == False
+        assert scp.service_type == None
+        assert scp.change_required == False
+        assert scp.association_is_cancelled == False
+
     def test_service_previous_calling_point(self, service):
         # Test a previous calling point.
         cp = service.previous_calling_points[0][1]

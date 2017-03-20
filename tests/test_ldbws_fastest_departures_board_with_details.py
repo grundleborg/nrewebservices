@@ -87,6 +87,9 @@ class TestFastestDeparturesBoardWithDetails(object):
         # Check the subsequent calling points list properties.
         scp = service.subsequent_calling_points[0]
         assert len(scp) == 3
+        assert scp.service_type == None
+        assert scp.change_required == False
+        assert scp.association_is_cancelled == False
 
         # Check the actual calling point properties.
         cp = scp[0]
