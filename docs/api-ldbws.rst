@@ -82,6 +82,13 @@ CallingPoint
    :show-inheritance:
    :inherited-members:
 
+CallingPointList
+----------------
+.. autoclass:: CallingPointList
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
 NextDeparturesItemBase
 ----------------------
 .. autoclass:: NextDeparturesItemBase
