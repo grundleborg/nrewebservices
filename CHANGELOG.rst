@@ -2,8 +2,8 @@
 Change Log
 ----------
 
-v0.1.4-dev
-==========
+v0.1.4
+======
 
 * Convenience properties of board services *origin* and *destination* which provide a single string
   suitable for display directly to users, instead of a list of objects.
