@@ -7,6 +7,9 @@ v0.1.4-dev
 
 * Convenience properties of board services *origin* and *destination* which provide a single string
   suitable for display directly to users, instead of a list of objects.
+* Strip whitespace from `via` field.
+* Python 3.6 support.
+* Break CallingPointList out into an object, as the list itself has properties too.
 
 v0.1.3
 ======
