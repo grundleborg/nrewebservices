@@ -117,4 +117,17 @@ ServiceDetails
    :show-inheritance:
    :inherited-members:
 
+Formation
+---------
+.. autoclass:: Formation
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+Coach
+-----
+.. autoclass:: Coach
+   :members:
+   :show-inheritance:
+   :inherited-members:
 
