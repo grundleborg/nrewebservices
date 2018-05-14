@@ -5,7 +5,10 @@ python:
   - "3.5"
   - "3.6"
   - "3.7-dev"
-install: "pip install -r requirements.txt -r requirements-dev.txt"
+install: 
+  - echo $TRAVIS_PYTHON_VERSION
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.7'* ]]; then pip install -U git+https://github.com/yaml/pyyaml.git; fi
+  - pip install -r requirements.txt -r requirements-dev.txt
 script: py.test --cov=./nrewebservices
 env:
     secure: "u+VdiAyMJZEsWpkw9vNa5bqzw0+hfEVUU0eFhcxLpHCxSe4W9TzHi+y0aCEFlTyXKwiyXogenf6h8eur0VFRob+dHLyAQpF9vMt8p5zZWWXzTE20Ts9ZoUa/z3abAF7+AqKpWo6mKTOiwoqKMiWDIL/1GOMd8fwPl4TV7Pf3dZpMkVx5lUWcDD5B506+7zwmOawX+nltokt077lOXeXqvfrEc/rn9U6+ja6Sm4o8innszly9alGYNawbZhlOnExX04LWWGlk7U2Th4sC8j2Gof+H5xbyDdUx+NFqHCLCo01t3RAoeobDLfcpxLzKk6zh7wNHAq4gEdrOwGgFlZtplT9kWY22o1If7hobBdi6ezSrczfwn6YkLrS29NzbzskdSU4dsdDn8mruj8tkHOhxfiVNIJ94jABAgViX2UEhDw96QUCfOQxk9TkgCUpLu22OErYet1hRv82e4gZvsdUP5KHE5qapZzJj8LixWFzszO+SURHOZn4RJbnezldB4in9S0uNtslYExiYEZ4Lv3iz1djOG+sa853UtKUXTaq0j2L6iHJxqVsQ3nsThYh1ADAbnU2rvdrWCR3qFG05eYUyNzXYI2G8neell02jKe9TD2lRJXEy6xHtpe2HjXlN2wI7fNRyvuC96xQDl2Ck6hZ07gWIOO87b8U3chGSrlZCo94="
