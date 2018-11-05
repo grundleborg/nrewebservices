@@ -1,5 +1,5 @@
 from nrewebservices.common import SoapResponseObject
-from nrewebservices.common import make_boolean_mapper, make_simple_mapper, make_stripped_text_mapper
+from nrewebservices.common import make_boolean_mapper, make_integer_mapper, make_simple_mapper, make_stripped_text_mapper
 
 def make_nrcc_mapper(field_name):
     def mapper(soap_response):
@@ -132,7 +132,7 @@ def make_formation_mapper(field_name):
 def make_coaches_mapper(field_name):
     def mapper(soap_response):
         try:
-            raw_coaches = getattr(soap_response, field_name)
+            raw_coaches = getattr(getattr(soap_response, field_name), 'coach')
         except AttributeError:
             raw_coaches = []
 
@@ -833,8 +833,8 @@ class Coach(SoapResponseObject):
     """
     field_map = [
             ('coach_class', make_simple_mapper('coachClass')),
-            ('loading', make_simple_mapper('loading')),
-            ('number', make_simple_mapper('number')),
+            ('loading', make_integer_mapper('loading')),
+            ('number', make_simple_mapper('_number')),
             ('toilet_type', make_toilet_type_mapper('toilet')),
             ('toilet_status', make_toilet_status_mapper('toilet')),
     ]

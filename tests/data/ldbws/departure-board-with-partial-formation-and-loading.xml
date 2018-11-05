@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetDepartureBoardResponse xmlns="http://thalesgroup.com/RTTI/2017-10-01/ldb/">
+            <GetStationBoardResult xmlns:lt="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" xmlns:lt6="http://thalesgroup.com/RTTI/2017-02-02/ldb/types" xmlns:lt7="http://thalesgroup.com/RTTI/2017-10-01/ldb/types" xmlns:lt4="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" xmlns:lt5="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" xmlns:lt2="http://thalesgroup.com/RTTI/2014-02-20/ldb/types" xmlns:lt3="http://thalesgroup.com/RTTI/2015-05-14/ldb/types">
+                <lt4:generatedAt>2018-11-05T17:35:13.1578591+00:00</lt4:generatedAt>
+                <lt4:locationName>Gatwick Airport</lt4:locationName>
+                <lt4:crs>GTW</lt4:crs>
+                <lt4:platformAvailable>true</lt4:platformAvailable>
+                <lt7:trainServices>
+                    <lt7:service>
+                        <lt4:std>17:33</lt4:std>
+                        <lt4:etd>17:35</lt4:etd>
+                        <lt4:platform>5</lt4:platform>
+                        <lt4:operator>Gatwick Express</lt4:operator>
+                        <lt4:operatorCode>GX</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>zXgydz+8qsD9oWxs47H8Jg==</lt4:serviceID>
+                        <lt5:rsid>GX000700</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:33</lt4:std>
+                        <lt4:etd>17:36</lt4:etd>
+                        <lt4:platform>4</lt4:platform>
+                        <lt4:operator>Southern</lt4:operator>
+                        <lt4:operatorCode>SN</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>dtEGT+JiCs8K46Xn45VjWA==</lt4:serviceID>
+                        <lt5:rsid>SN705600</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:36</lt4:std>
+                        <lt4:etd>On time</lt4:etd>
+                        <lt4:platform>3</lt4:platform>
+                        <lt4:operator>Thameslink</lt4:operator>
+                        <lt4:operatorCode>TL</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>DoOMHm7yGWB/d/oOrZ6IUQ==</lt4:serviceID>
+                        <lt5:rsid>TL074800</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Bedford</lt4:locationName>
+                                <lt4:crs>BDM</lt4:crs>
+                                <lt4:via>via London Bridge</lt4:via>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:36</lt4:std>
+                        <lt4:etd>On time</lt4:etd>
+                        <lt4:platform>7</lt4:platform>
+                        <lt4:operator>Thameslink</lt4:operator>
+                        <lt4:operatorCode>TL</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>mmd9jTioQ3bX2uVz7GHCKw==</lt4:serviceID>
+                        <lt5:rsid>TL072000</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Bedford</lt4:locationName>
+                                <lt4:crs>BDM</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:39</lt4:std>
+                        <lt4:etd>17:41</lt4:etd>
+                        <lt4:platform>5</lt4:platform>
+                        <lt4:operator>Southern</lt4:operator>
+                        <lt4:operatorCode>SN</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>9tp02xZXY8gQesZ5fS/QXQ==</lt4:serviceID>
+                        <lt5:rsid>SN709500</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Bognor Regis</lt4:locationName>
+                                <lt4:crs>BOG</lt4:crs>
+                                <lt4:via>via Horsham </lt4:via>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:39</lt4:std>
+                        <lt4:etd>On time</lt4:etd>
+                        <lt4:platform>1</lt4:platform>
+                        <lt4:operator>Southern</lt4:operator>
+                        <lt4:operatorCode>SN</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:length>16</lt4:length>
+                        <lt4:serviceID>/4oL7WRWfg0U6NdHKYjm6Q==</lt4:serviceID>
+                        <lt5:rsid>SN132101</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Bognor Regis</lt4:locationName>
+                                <lt4:crs>BOG</lt4:crs>
+                            </lt4:location>
+                            <lt4:location>
+                                <lt4:locationName>Portsmouth Harbour</lt4:locationName>
+                                <lt4:crs>PMH</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:42</lt4:std>
+                        <lt4:etd>17:46</lt4:etd>
+                        <lt4:platform>7</lt4:platform>
+                        <lt4:operator>Gatwick Express</lt4:operator>
+                        <lt4:operatorCode>GX</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>uAor3dBN+gCdyLE6l+bmtQ==</lt4:serviceID>
+                        <lt5:rsid>GX000800</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:42</lt4:std>
+                        <lt4:etd>On time</lt4:etd>
+                        <lt4:platform>4</lt4:platform>
+                        <lt4:operator>Gatwick Express</lt4:operator>
+                        <lt4:operatorCode>GX</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>GRzcufWhapfgNY6foVqeUw==</lt4:serviceID>
+                        <lt5:rsid>GX055600</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>London Victoria</lt4:locationName>
+                                <lt4:crs>VIC</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                        <lt7:formation>
+                            <lt7:coaches>
+                                <lt7:coach number="0">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">None</lt7:toilet>
+                                    <lt7:loading>93</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="1">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">Accessible</lt7:toilet>
+                                    <lt7:loading>100</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="2">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">Standard</lt7:toilet>
+                                    <lt7:loading>58</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="3">
+                                    <lt7:coachClass>Mixed</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">None</lt7:toilet>
+                                    <lt7:loading>58</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="4">
+                                    <lt7:coachClass>Mixed</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">None</lt7:toilet>
+                                    <lt7:loading>55</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="5">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">Standard</lt7:toilet>
+                                    <lt7:loading>58</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="6">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">Accessible</lt7:toilet>
+                                    <lt7:loading>48</lt7:loading>
+                                </lt7:coach>
+                                <lt7:coach number="7">
+                                    <lt7:coachClass>Standard</lt7:coachClass>
+                                    <lt7:toilet status="Unknown">None</lt7:toilet>
+                                    <lt7:loading>25</lt7:loading>
+                                </lt7:coach>
+                            </lt7:coaches>
+                        </lt7:formation>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:45</lt4:std>
+                        <lt4:etd>17:50</lt4:etd>
+                        <lt4:platform>5</lt4:platform>
+                        <lt4:operator>Thameslink</lt4:operator>
+                        <lt4:operatorCode>TL</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>9IBflk0mkVxC8hRwLUYj8g==</lt4:serviceID>
+                        <lt5:rsid>TL057400</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Cambridge</lt4:locationName>
+                                <lt4:crs>CBG</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Brighton</lt4:locationName>
+                                <lt4:crs>BTN</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                    <lt7:service>
+                        <lt4:std>17:46</lt4:std>
+                        <lt4:etd>17:48</lt4:etd>
+                        <lt4:platform>3</lt4:platform>
+                        <lt4:operator>Thameslink</lt4:operator>
+                        <lt4:operatorCode>TL</lt4:operatorCode>
+                        <lt4:serviceType>train</lt4:serviceType>
+                        <lt4:serviceID>7/pNiL/dyTffJKjYJYFf5g==</lt4:serviceID>
+                        <lt5:rsid>TL140400</lt5:rsid>
+                        <lt5:origin>
+                            <lt4:location>
+                                <lt4:locationName>Peterborough</lt4:locationName>
+                                <lt4:crs>PBO</lt4:crs>
+                            </lt4:location>
+                        </lt5:origin>
+                        <lt5:destination>
+                            <lt4:location>
+                                <lt4:locationName>Horsham</lt4:locationName>
+                                <lt4:crs>HRH</lt4:crs>
+                            </lt4:location>
+                        </lt5:destination>
+                    </lt7:service>
+                </lt7:trainServices>
+            </GetStationBoardResult>
+        </GetDepartureBoardResponse>
+    </soap:Body>
+</soap:Envelope>
