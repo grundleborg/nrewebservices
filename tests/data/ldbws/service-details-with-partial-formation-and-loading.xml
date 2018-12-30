@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetServiceDetailsResponse xmlns="http://thalesgroup.com/RTTI/2017-10-01/ldb/">
+            <GetServiceDetailsResult xmlns:lt="http://thalesgroup.com/RTTI/2012-01-13/ldb/types" xmlns:lt6="http://thalesgroup.com/RTTI/2017-02-02/ldb/types" xmlns:lt7="http://thalesgroup.com/RTTI/2017-10-01/ldb/types" xmlns:lt4="http://thalesgroup.com/RTTI/2015-11-27/ldb/types" xmlns:lt5="http://thalesgroup.com/RTTI/2016-02-16/ldb/types" xmlns:lt2="http://thalesgroup.com/RTTI/2014-02-20/ldb/types" xmlns:lt3="http://thalesgroup.com/RTTI/2015-05-14/ldb/types">
+                <lt7:generatedAt>2018-11-05T18:52:02.9465863+00:00</lt7:generatedAt>
+                <lt7:serviceType>train</lt7:serviceType>
+                <lt7:locationName>Gatwick Airport</lt7:locationName>
+                <lt7:crs>GTW</lt7:crs>
+                <lt7:operator>Gatwick Express</lt7:operator>
+                <lt7:operatorCode>GX</lt7:operatorCode>
+                <lt7:rsid>GX001500</lt7:rsid>
+                <lt7:platform>7</lt7:platform>
+                <lt7:sta>18:41</lt7:sta>
+                <lt7:ata>18:47</lt7:ata>
+                <lt7:std>18:42</lt7:std>
+                <lt7:atd>18:49</lt7:atd>
+                <lt7:formation>
+                    <lt7:coaches>
+                        <lt7:coach number="0">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                            <lt7:loading>83</lt7:loading>
+                        </lt7:coach>
+                        <lt7:coach number="1">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                            <lt7:loading>42</lt7:loading>
+                        </lt7:coach>
+                        <lt7:coach number="2">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                            <lt7:loading>80</lt7:loading>
+                        </lt7:coach>
+                        <lt7:coach number="3">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                            <lt7:loading>62</lt7:loading>
+                        </lt7:coach>
+                        <lt7:coach number="4">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="5">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="6">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="7">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="8">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="9">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="10">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                        <lt7:coach number="11">
+                            <lt7:coachClass>ClassNotSet</lt7:coachClass>
+                            <lt7:toilet status="Unknown">Unknown</lt7:toilet>
+                        </lt7:coach>
+                    </lt7:coaches>
+                </lt7:formation>
+                <lt7:previousCallingPoints>
+                    <lt7:callingPointList>
+                        <lt7:callingPoint>
+                            <lt7:locationName>London Victoria</lt7:locationName>
+                            <lt7:crs>VIC</lt7:crs>
+                            <lt7:st>18:13</lt7:st>
+                            <lt7:at>On time</lt7:at>
+                        </lt7:callingPoint>
+                    </lt7:callingPointList>
+                </lt7:previousCallingPoints>
+                <lt7:subsequentCallingPoints>
+                    <lt7:callingPointList>
+                        <lt7:callingPoint>
+                            <lt7:locationName>Burgess Hill</lt7:locationName>
+                            <lt7:crs>BUG</lt7:crs>
+                            <lt7:st>18:56</lt7:st>
+                            <lt7:et>19:01</lt7:et>
+                        </lt7:callingPoint>
+                        <lt7:callingPoint>
+                            <lt7:locationName>Hassocks</lt7:locationName>
+                            <lt7:crs>HSK</lt7:crs>
+                            <lt7:st>19:00</lt7:st>
+                            <lt7:et>19:05</lt7:et>
+                        </lt7:callingPoint>
+                        <lt7:callingPoint>
+                            <lt7:locationName>Brighton</lt7:locationName>
+                            <lt7:crs>BTN</lt7:crs>
+                            <lt7:st>19:12</lt7:st>
+                            <lt7:et>19:15</lt7:et>
+                        </lt7:callingPoint>
+                    </lt7:callingPointList>
+                </lt7:subsequentCallingPoints>
+            </GetServiceDetailsResult>
+        </GetServiceDetailsResponse>
+    </soap:Body>
+</soap:Envelope>

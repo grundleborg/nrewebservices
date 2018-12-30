@@ -158,6 +158,19 @@ def make_toilet_status_mapper(field_name):
         return value
     return mapper
 
+def make_coach_class_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            value = getattr(soap_response, field_name)
+        except AttributeError:
+            value = None
+
+        if value == 'ClassNotSet':
+            value = ''
+
+        return value
+    return mapper
+
 class BoardBase(SoapResponseObject):
     """
     This class acts as the base class containing the common attributes for the various classes that
@@ -762,6 +775,8 @@ class ServiceDetails(SoapResponseObject):
             CallingPointList, the first list represents the through service, and the subsequent
             lists represent associated services, with the location of the join being the first
             station on each of the subsequent lists.
+
+        formation (Formation): the formation details (if available) for this service.
     """
     field_map = [
             ('generated_at', make_simple_mapper('generatedAt')),
@@ -788,6 +803,7 @@ class ServiceDetails(SoapResponseObject):
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
             ('previous_calling_points', make_calling_point_lists_mapper('previousCallingPoints')),
             ('subsequent_calling_points', make_calling_point_lists_mapper('subsequentCallingPoints')),
+            ('formation', make_formation_mapper('formation')),
     ]
 
     def __init__(self, soap_response, *args, **kwargs):
@@ -819,7 +835,8 @@ class Coach(SoapResponseObject):
     need to instantiate this class directly.
 
     Attributes:
-        coach_class (str): The class (typically first, mixed or standard) of the coach.
+        coach_class (str): The class (typically first, mixed or standard) of the coach. If this is
+            not known, an empty string will be returned.
 
         loading (int): The live loading value as a percentage from 0-100.
 
@@ -832,7 +849,7 @@ class Coach(SoapResponseObject):
             NotInService).
     """
     field_map = [
-            ('coach_class', make_simple_mapper('coachClass')),
+            ('coach_class', make_coach_class_mapper('coachClass')),
             ('loading', make_integer_mapper('loading')),
             ('number', make_simple_mapper('_number')),
             ('toilet_type', make_toilet_type_mapper('toilet')),
