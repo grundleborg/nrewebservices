@@ -398,12 +398,12 @@ class TestSession(object):
         assert r.next_departures[2].crs == "RDG"
 
     def test_get_service(self, session):
-        r = session.get_station_board("PAD", include_departures=True, include_arrivals=False)
+        r = session.get_station_board("LBG", include_departures=True, include_arrivals=False)
         assert len(r.train_services) > 0
 
         s = session.get_service_details(r.train_services[0].service_id)
 
-        assert s.crs == "PAD"
+        assert s.crs == "LBG"
 
     def test_get_service_invalid_id(self, session):
         # TODO: Wrap up SUDS errors in something more helpful in the API.
