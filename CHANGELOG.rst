@@ -2,7 +2,7 @@
 Change Log
 ----------
 
-v0.1.5-dev
+v0.2.0-dev
 ==========
 
 * Discontinue support for Python 2.6 and 3.3, and officially add support for Python 3.6 & 3.7.
