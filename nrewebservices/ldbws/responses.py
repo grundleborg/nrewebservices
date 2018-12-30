@@ -1,5 +1,5 @@
 from nrewebservices.common import SoapResponseObject
-from nrewebservices.common import make_boolean_mapper, make_simple_mapper, make_stripped_text_mapper
+from nrewebservices.common import make_boolean_mapper, make_integer_mapper, make_simple_mapper, make_stripped_text_mapper
 
 def make_nrcc_mapper(field_name):
     def mapper(soap_response):
@@ -118,6 +118,44 @@ def make_location_text_mapper(field_name):
             return ', '.join(text_items)
         except AttributeError:
             return ''
+    return mapper
+
+def make_formation_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            formation = Formation(getattr(soap_response, field_name))
+        except AttributeError:
+            formation = None
+        return formation
+    return mapper
+
+def make_coaches_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            raw_coaches = getattr(getattr(soap_response, field_name), 'coach')
+        except AttributeError:
+            raw_coaches = []
+
+        coaches = [Coach(coach) for coach in raw_coaches]
+        return coaches
+    return mapper
+
+def make_toilet_type_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            value = getattr(getattr(soap_response, field_name), 'value')
+        except AttributeError:
+            value = "Unknown"
+        return value
+    return mapper
+
+def make_toilet_status_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            value = getattr(getattr(soap_response, field_name), 'status')
+        except AttributeError:
+            value = "Unknown"
+        return value
     return mapper
 
 class BoardBase(SoapResponseObject):
@@ -373,6 +411,8 @@ class ServiceItemBase(SoapResponseObject):
 
         destination (str): the destination (or destinations) of this service as a single string
             which is suitable for display directly to users.
+
+        formation (Formation): the formation details (if available) for this service.
     """
 
     field_map = [
@@ -399,6 +439,7 @@ class ServiceItemBase(SoapResponseObject):
             ('service_id', make_simple_mapper('serviceID')),
             ('adhoc_alerts', make_simple_mapper('adhocAlerts')),
             ('rsid', make_simple_mapper('rsid')),
+            ('formation', make_formation_mapper('formation')),
     ]
 
     computed_field_map = [
@@ -752,4 +793,49 @@ class ServiceDetails(SoapResponseObject):
     def __init__(self, soap_response, *args, **kwargs):
         super(ServiceDetails, self).__init__(soap_response, *args, **kwargs)
 
+
+class Formation(SoapResponseObject):
+    """
+    This class represents the details of the rolling stock formation which is operating a given
+    service, including such details as the carriage loading values and the operational status
+    of toilets. You do not normally need to instantiate this class directly.
+
+    Attributes:
+        average_loading (int): the historical average loading of this service represented as a
+            percentage in the range 0-100.
+
+        coaches ([Coach]): an ordered list of Coach objects representing the coaches making up this
+            formation.
+    """
+    field_map = [
+            ('average_loading', make_simple_mapper('avgLoading')),
+            ('coaches', make_coaches_mapper('coaches')),
+    ]
+
+
+class Coach(SoapResponseObject):
+    """
+    This class represents an individual coach within a rolling stock formation. You do not normally
+    need to instantiate this class directly.
+
+    Attributes:
+        coach_class (str): The class (typically first, mixed or standard) of the coach.
+
+        loading (int): The live loading value as a percentage from 0-100.
+
+        number (str): The "number" of the Coach, e.g. "3" or "F". Up to 2 characters in length.
+
+        toilet_type (str): The type of toilet in this coach (either Unknown, None, Standard or
+            Accessible.
+
+        toilet_status (str): The operational status of the toilet (either Unknown, InService or
+            NotInService).
+    """
+    field_map = [
+            ('coach_class', make_simple_mapper('coachClass')),
+            ('loading', make_integer_mapper('loading')),
+            ('number', make_simple_mapper('_number')),
+            ('toilet_type', make_toilet_type_mapper('toilet')),
+            ('toilet_status', make_toilet_status_mapper('toilet')),
+    ]
 

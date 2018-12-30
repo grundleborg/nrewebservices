@@ -41,4 +41,14 @@ def make_stripped_text_mapper(field_name):
         return value
     return mapper
 
+def make_integer_mapper(field_name):
+    def mapper(soap_response):
+        try:
+            value = int(getattr(soap_response, field_name))
+        except AttributeError:
+            value = None
+
+        return value
+    return mapper
+
 
