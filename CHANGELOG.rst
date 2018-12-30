@@ -5,7 +5,7 @@ Change Log
 v0.1.5-dev
 ==========
 
-* Discontinue support for Python 2.6 and 3.3, and officially add support for Python 3.6.
+* Discontinue support for Python 2.6 and 3.3, and officially add support for Python 3.6 & 3.7.
 
 v0.1.4
 ======
