@@ -2,8 +2,8 @@
 Change Log
 ----------
 
-v0.2.0-dev
-==========
+v0.2.0
+======
 
 * Discontinue support for Python 2.6 and 3.3, and officially add support for Python 3.6 & 3.7.
 * Update to the 2017-10-01 version of the LDBWS schema. This introduces Formations for services.
