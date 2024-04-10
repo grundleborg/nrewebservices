@@ -2,8 +2,11 @@
 Change Log
 ----------
 
-v0.2.1
+v0.2.2-dev
 ==========
+
+v0.2.1
+======
 
 * Switch from suds-jurko to suds
 * Discontinue support for python < 3.5, and add support for python to 3.12
