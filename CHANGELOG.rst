@@ -2,7 +2,7 @@
 Change Log
 ----------
 
-v0.3.0-dev
+v0.2.1-dev
 ==========
 
 * Switch from suds-jurko to suds

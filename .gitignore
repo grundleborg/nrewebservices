@@ -4,6 +4,7 @@ __pycache__
 docs/_build
 .coverage
 .python-version
+*.swp
 
 # SetupTools artifacts.
 build/
