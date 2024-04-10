@@ -20,7 +20,7 @@
 NREWebServices
 ==============
 
-A Python 2/3 client for the National Rail Enquiries web services.
+A Python 3 client for the National Rail Enquiries web services.
 
 Supported Web Services
 ----------------------

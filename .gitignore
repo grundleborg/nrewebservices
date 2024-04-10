@@ -3,6 +3,7 @@ __pycache__
 .cache
 docs/_build
 .coverage
+.python-version
 
 # SetupTools artifacts.
 build/
